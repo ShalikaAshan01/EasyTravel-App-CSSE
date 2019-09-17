@@ -1,5 +1,7 @@
 {
   "name": "EasyTravel",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
