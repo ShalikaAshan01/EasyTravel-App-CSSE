@@ -1,0 +1,75 @@
+<ion-content>
+  <ion-progress-bar *ngIf="showProgressBar" type="indeterminate" color="dark"></ion-progress-bar>
+  <ion-grid>
+    <ion-grid class="content">
+
+      <ion-row justify-content-center>
+
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <ion-row justify-content-center>
+            <ion-col align-self-center>
+              <div></div>
+            </ion-col>
+            <ion-col>
+              <img src="./../../assets/images/logo.png" alt="" />
+            </ion-col>
+            <ion-col>
+              <div></div>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+
+              <form *ngIf="!showOTPinput" (ngSubmit)="login()">
+                <ion-item color="warning" lines="none">
+                  <ion-label slot="start" color="dark">
+                    +94
+                  </ion-label>
+                  <ion-input [(ngModel)]="phoneNumber" name="phoneNumber" maxlength="" color="dark" type="number"
+                    placeholder="PHONE NUMBER">
+                  </ion-input>
+                </ion-item>
+                <ion-item color="warning" lines="none">
+                  <ion-button expand="block" color="dark" class="btn-secondary" type="submit">LOGIN</ion-button>
+                </ion-item>
+                <p text-center>Login with your phone number <br> to get started.</p>
+              </form>
+
+              <form *ngIf="showOTPinput" (ngSubmit)="sendOTP()">
+                <ion-item color="warning" lines="none">
+                  <ion-label slot="start" color="dark">
+                    E -
+                  </ion-label>
+                  <ion-input [(ngModel)]="otp" name="otp" maxlength="9" color="dark" type="number"
+                    placeholder="OTP CODE">
+                  </ion-input>
+                </ion-item>
+                <ion-item color="warning" lines="none">
+                  <ion-button expand="block" color="dark" class="btn-secondary" type="submit">CONFIRM</ion-button>
+                </ion-item>
+                <p text-center>Enter the OTP code you received to <strong>+94{{phoneNumber}}</strong> to confirm
+                  your
+                  phone number.</p>
+              </form>
+
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col text-center>
+              <!-- <ion-card no-margin padding>
+                <ion-card-title text-center>
+                  Enter your phone number to get started.
+                </ion-card-title>
+              </ion-card> -->
+            </ion-col>
+          </ion-row>
+        </ion-col>
+
+      </ion-row>
+
+    </ion-grid>
+  </ion-grid>
+
+</ion-content>
