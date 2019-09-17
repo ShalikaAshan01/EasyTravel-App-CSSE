@@ -1,0 +1,52 @@
+<ion-content>
+  <ion-progress-bar *ngIf="showProgressBar" type="indeterminate" color="dark"></ion-progress-bar>
+  <ion-grid>
+    <ion-grid class="content">
+
+      <ion-row justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <ion-row justify-content-center>
+            <ion-col align-self-center>
+              <div></div>
+            </ion-col>
+            <ion-col>
+              <img src="./../../assets/images/logo.png" alt="" />
+            </ion-col>
+            <ion-col>
+              <div></div>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <form (ngSubmit)="login()">
+                <ion-item color="warning" lines="none">
+                  <ion-label slot="start" color="dark">
+                    +94
+                  </ion-label>
+                  <ion-input ([ngModel])="phoneNumber" color="dark" type="number" placeholder="Phone Number">
+                  </ion-input>
+                </ion-item>
+                <ion-button color="dark" class="btn-secondary" type="submit">LOGIN</ion-button>
+              </form>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col text-center>
+              <!-- <ion-card no-margin padding>
+                <ion-card-title text-center>
+                  Enter your phone number to get started.
+                </ion-card-title>
+              </ion-card> -->
+              <p>Login with your phone number <br> to get started.</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+
+      </ion-row>
+
+    </ion-grid>
+  </ion-grid>
+
+</ion-content>
