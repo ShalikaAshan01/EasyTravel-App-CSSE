@@ -4,6 +4,7 @@
     <ion-grid class="content">
 
       <ion-row justify-content-center>
+
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
           <ion-row justify-content-center>
             <ion-col align-self-center>
@@ -19,16 +20,44 @@
 
           <ion-row>
             <ion-col>
-              <form (ngSubmit)="login()">
+
+              <form *ngIf="!showOTPinput" (ngSubmit)="login()">
                 <ion-item color="warning" lines="none">
                   <ion-label slot="start" color="dark">
                     +94
                   </ion-label>
-                  <ion-input ([ngModel])="phoneNumber" color="dark" type="number" placeholder="Phone Number">
+                  <ion-input [(ngModel)]="phoneNumber" name="phoneNumber" maxlength="" color="dark" type="number"
+                    placeholder="PHONE NUMBER">
                   </ion-input>
                 </ion-item>
-                <ion-button color="dark" class="btn-secondary" type="submit">LOGIN</ion-button>
+                <ion-item color="warning" lines="none">
+                  <ion-button color="dark" class="btn-secondary" type="submit">LOGIN</ion-button>
+                </ion-item>
+                <ion-item color="warning" lines="none">
+                  <ion-text color="dark" text-center>
+                    <p text-center>Login with your phone number <br> to get started.</p>
+                  </ion-text>
+                </ion-item>
               </form>
+
+              <form *ngIf="showOTPinput" (ngSubmit)="sendOTP()">
+                <ion-item color="warning" lines="none">
+                  <ion-label slot="start" color="dark">
+                    E -
+                  </ion-label>
+                  <ion-input [(ngModel)]="otp" name="otp" color="dark" type="number" placeholder="OTP CODE">
+                  </ion-input>
+                </ion-item>
+                <ion-item color="warning" lines="none">
+                  <ion-button color="dark" class="btn-secondary" type="submit">CONFIRM</ion-button>
+                </ion-item>
+                <ion-item color="warning" lines="none" text-center>
+                  <ion-text color="dark" text-center>
+                    <p text-center>Enter the OTP code you received to {{phoneNumber}}<br> to get started.</p>
+                  </ion-text>
+                </ion-item>
+              </form>
+
             </ion-col>
           </ion-row>
 
@@ -39,7 +68,6 @@
                   Enter your phone number to get started.
                 </ion-card-title>
               </ion-card> -->
-              <p>Login with your phone number <br> to get started.</p>
             </ion-col>
           </ion-row>
         </ion-col>
