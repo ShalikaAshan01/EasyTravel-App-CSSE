@@ -31,13 +31,9 @@
                   </ion-input>
                 </ion-item>
                 <ion-item color="warning" lines="none">
-                  <ion-button color="dark" class="btn-secondary" type="submit">LOGIN</ion-button>
+                  <ion-button expand="block" color="dark" class="btn-secondary" type="submit">LOGIN</ion-button>
                 </ion-item>
-                <ion-item color="warning" lines="none">
-                  <ion-text color="dark" text-center>
-                    <p text-center>Login with your phone number <br> to get started.</p>
-                  </ion-text>
-                </ion-item>
+                <p text-center>Login with your phone number <br> to get started.</p>
               </form>
 
               <form *ngIf="showOTPinput" (ngSubmit)="sendOTP()">
@@ -45,17 +41,16 @@
                   <ion-label slot="start" color="dark">
                     E -
                   </ion-label>
-                  <ion-input [(ngModel)]="otp" name="otp" color="dark" type="number" placeholder="OTP CODE">
+                  <ion-input [(ngModel)]="otp" name="otp" maxlength="9" color="dark" type="number"
+                    placeholder="OTP CODE">
                   </ion-input>
                 </ion-item>
                 <ion-item color="warning" lines="none">
-                  <ion-button color="dark" class="btn-secondary" type="submit">CONFIRM</ion-button>
+                  <ion-button expand="block" color="dark" class="btn-secondary" type="submit">CONFIRM</ion-button>
                 </ion-item>
-                <ion-item color="warning" lines="none" text-center>
-                  <ion-text color="dark" text-center>
-                    <p text-center>Enter the OTP code you received to {{phoneNumber}}<br> to get started.</p>
-                  </ion-text>
-                </ion-item>
+                <p text-center>Enter the OTP code you received to <strong>+94{{phoneNumber}}</strong> to confirm
+                  your
+                  phone number.</p>
               </form>
 
             </ion-col>
