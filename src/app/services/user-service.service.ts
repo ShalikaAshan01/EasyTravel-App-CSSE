@@ -12,9 +12,9 @@ export class UserServiceService {
   createUser(userId, number) {
     var record = {
       accountBalance: 0,
-      firstName: null,
-      lastName: null,
-      nic: null,
+      firstName: "",
+      lastName: "",
+      nic: "",
       phoneNumber: number,
       holdBalance: 0,
       status: 'inactive',
