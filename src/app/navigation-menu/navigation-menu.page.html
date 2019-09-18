@@ -1,0 +1,31 @@
+<ion-split-pane>
+  <ion-menu contentId="content">
+    <ion-header color="dark" padding>
+
+      <ion-item color="dark" lines="none">
+        <ion-label>John Doe</ion-label>
+        <ion-note slot="end" color="warning">
+          <div class="account-balance">LKR 1000.00</div>
+        </ion-note>
+      </ion-item>
+
+      <!-- <ion-item color="dark" lines="none">
+        <ion-note slot="start"></ion-note>
+        <ion-label>Note (Start)</ion-label>
+      </ion-item> -->
+
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle auto-hide="false" *ngFor="let page of pages">
+          <ion-item lines="none" [routerLink]="page.url" routerDirection="root"
+            [class.active-item]="selectedPath == page.url">
+            <ion-icon slot="start" name="{{page.icon}}"></ion-icon>
+            <ion-label>{{page.title}}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id='content' main></ion-router-outlet>
+</ion-split-pane>
