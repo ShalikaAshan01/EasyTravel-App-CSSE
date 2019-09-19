@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Ride, RideService } from '../services/ride.service';
+import { Ride, RideService } from '../services/ride.service/ride.service';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';

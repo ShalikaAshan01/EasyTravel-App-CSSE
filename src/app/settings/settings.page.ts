@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserServiceService } from '../services/user-service.service';
+import { UserServiceService } from '../services/user-service/user-service.service';
 import { Storage } from '@ionic/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';

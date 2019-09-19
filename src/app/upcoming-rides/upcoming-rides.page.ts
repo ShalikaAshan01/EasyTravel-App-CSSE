@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
-import { RideService } from '../services/ride.service';
-import { UserServiceService } from '../services/user-service.service';
+import { RideService } from '../services/ride.service/ride.service';
+import { UserServiceService } from '../services/user-service/user-service.service';
 
 @Component({
   selector: 'app-upcoming-rides',
