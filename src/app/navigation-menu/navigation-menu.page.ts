@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
+import { Storage } from '@ionic/storage';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-navigation-menu',
@@ -27,11 +29,32 @@ export class NavigationMenuPage implements OnInit {
   ];
 
   selectedPath = '';
+  userAccount: any;
+  accBalance: any;
+  lname: any;
+  fname: any;
+  userId: any;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private storage: Storage, private firestore: AngularFirestore) {
+    // var userAcc = {
+    //   userId: 'kT9HbHVP8eXNDeubcaomjUXMOBm1',
+    // }
+    // storage.set('user', userAcc);
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedPath = event.url;
     });
+    this.storage.get('user').then((val) => {
+      this.userId = val.userId;
+      this.firestore.collection('passengers').doc(this.userId).valueChanges()
+        .subscribe(_user => {
+          this.userAccount = _user;
+          console.log(this.userAccount);
+          this.fname = this.userAccount.firstName;
+          this.lname = this.userAccount.lastName;
+          this.accBalance = this.userAccount.accountBalance;
+        });
+    });
+  
   }
 
   ngOnInit() {

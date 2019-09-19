@@ -131,7 +131,7 @@ export class LoginPage implements OnInit {
 
       // TODO: Navigate to Home.
       this.showOTPinput = false;
-      // this.router.navigate(['/home']);
+      this.router.navigate(['menu/home']);
 
     }, 3000)
   }
