@@ -29,4 +29,8 @@ export class UserServiceService {
     return this.firestore.collection('passengers').doc(userId).get();
   }
 
+  updateUser(userId, userObj) {
+    return this.firestore.collection('passengers').doc(userId).update(userObj);
+  }
+
 }

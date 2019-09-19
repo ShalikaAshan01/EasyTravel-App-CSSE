@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
-import { UserServiceService } from '../services/user-service.service'
+import { UserServiceService } from '../services/user-service/user-service.service'
 import { Storage } from '@ionic/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 
@@ -73,7 +73,7 @@ export class LoginPage implements OnInit {
               });
             }
           });
-        navCtrl.navigateRoot(['/home']);
+          this.router.navigate(['menu/home']);
         console.log(user.uid);
       } else {
         navCtrl.navigateRoot(['']);
@@ -131,7 +131,7 @@ export class LoginPage implements OnInit {
 
       // TODO: Navigate to Home.
       this.showOTPinput = false;
-      // this.router.navigate(['/home']);
+      
 
     }, 3000)
   }
