@@ -49,6 +49,7 @@ export class NavigationMenuPage implements OnInit {
   lname: any;
   fname: any;
   userId: any;
+  phoneNumber: any;
 
   constructor(private router: Router, private storage: Storage, private firestore: AngularFirestore) {
     // var userAcc = {
@@ -67,6 +68,7 @@ export class NavigationMenuPage implements OnInit {
           this.fname = this.userAccount.firstName;
           this.lname = this.userAccount.lastName;
           this.accBalance = this.userAccount.accountBalance;
+          this.phoneNumber = this.userAccount.phoneNumber;
         });
     });
   

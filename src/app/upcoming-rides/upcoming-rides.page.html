@@ -11,7 +11,7 @@
 
   <ion-list>
 
-    <ng-container *ngIf="!rides || rides.length == 0">
+    <ng-container *ngIf="!rides">
       <div *ngFor="let n of [0, 1, 2, 3]" padding>
         <ion-skeleton-text></ion-skeleton-text>
         <p>
@@ -20,23 +20,34 @@
       </div>
     </ng-container>
 
+    <div class="ion-text-center" *ngIf="rides">
+      <ion-text color="light">Swipe left to edit ride.</ion-text>
+    </div>
     <div *ngFor="let ride of rides">
       <ion-item-sliding *ngIf="ride.status != 'completed'">
-        <ion-item lines="inset" button>
-          <ion-icon slot="start" color="danger" name="alert"></ion-icon>
+        <ion-item lines="inset" button [color]="ride.status == 'ongoing' ? 'success' : ''">
+          <ion-icon slot="start" [color]="ride.status == 'ongoing' ? 'secondary' : 'danger'"
+            [name]="ride.status == 'ongoing' ? 'rocket' : 'today'"></ion-icon>
           <ion-label>
             <h2><strong>{{ride.startPoint}} - {{ride.endPoint}}</strong></h2>
             <h2>LKR {{ride.ticketAmount}}</h2>
             <h2>{{ride.status}}</h2>
-            <p>{{ride.startTime}}</p>
+            <p>Booked on: {{ride.createdAt}}</p>
+            <p *ngIf="ride.status == 'ongoing'">
+              Ride started: {{ride.startTime}}
+            </p>
           </ion-label>
-          <ion-note slot="end" color="success">
-            <h3>{{ride.bus.route}}</h3>
+          <ion-note slot="end" [color]="ride.status == 'ongoing' ? 'secondary' : 'success'" text-center>
+            <p *ngIf="ride.status == 'ongoing'">
+              WP-NA-4578
+            </p>
+            <h3>{{ride.route}}</h3>
+            <p>Route</p>
           </ion-note>
         </ion-item>
 
         <ion-item-options side="end">
-          <ion-item-option color="success">
+          <ion-item-option color="primary">
             Extend
             <ion-icon name="create" slot="end"></ion-icon>
           </ion-item-option>
