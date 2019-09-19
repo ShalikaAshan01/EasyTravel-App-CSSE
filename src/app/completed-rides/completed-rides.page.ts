@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Ride, RideService } from '../services/ride.service';
+import { AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-completed-rides',
@@ -7,38 +11,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompletedRidesPage implements OnInit {
 
-  rides = null;
+  userId = 'N4t9BinxRDhBtNwFEMEI';
+  rides: Ride[];
 
-  constructor() {
-
-    this.rides = [
-      {
-        id: '4L2aSRHiF3wqryU0DTOB',
-        startPoint: 'Kaduwela',
-        endPoint: 'Kollupitiya',
-        startTime: 'September 18, 2019 at 8:36:01 PM UTC+5:30',
-        ticketAmount: 42.00,
-        status: 'completed',
-        bus: {
-          route: '177'
-        }
-      },
-      {
-        id: '4L2aSRHiF3wqryU0DTOB',
-        startPoint: 'Malabe',
-        endPoint: 'Maharagama',
-        startTime: 'September 19, 2019 at 5:12:58 PM UTC+5:30',
-        ticketAmount: 36.00,
-        status: 'not_started',
-        bus: {
-          route: '993'
-        }
-      }
-    ];
+  constructor(private rideService: RideService) {
 
   }
 
   ngOnInit() {
+    this.getRides();
+  }
+
+  getRides() {
+    this.rideService.getRides(this.userId).subscribe(ride => {
+      this.rides = ride;
+      console.log(this.rides);
+    });
+  }
+
+  removeRide(rideId) {
+    this.rideService.removeRide(rideId);
   }
 
 }

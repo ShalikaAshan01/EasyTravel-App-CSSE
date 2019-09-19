@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import { RideService } from '../services/ride.service';
+import { UserServiceService } from '../services/user-service.service';
 
 @Component({
   selector: 'app-upcoming-rides',
@@ -8,42 +10,23 @@ import { ToastController } from '@ionic/angular';
 })
 export class UpcomingRidesPage implements OnInit {
 
+  userId = 'N4t9BinxRDhBtNwFEMEI';
   rides = null;
 
-  constructor(private toastController: ToastController) {
-
-    this.rides = [
-      {
-        id: '4L2aSRHiF3wqryU0DTOB',
-        startPoint: 'Kaduwela',
-        endPoint: 'Kollupitiya',
-        startTime: 'September 18, 2019 at 8:36:01 PM UTC+5:30',
-        ticketAmount: 42.00,
-        status: 'completed',
-        bus: {
-          route: '177'
-        }
-      },
-      {
-        id: '4L2aSRHiF3wqryU0DTOB',
-        startPoint: 'Malabe',
-        endPoint: 'Maharagama',
-        startTime: 'September 19, 2019 at 5:12:58 PM UTC+5:30',
-        ticketAmount: 36.00,
-        status: 'not_started',
-        bus: {
-          route: '993'
-        }
-      }
-    ];
+  constructor(private toastController: ToastController, private rideService: RideService) {
 
   }
 
   ngOnInit() {
-    console.log(this.rides.length)
-    if (this.rides.length == 0) {
-      this.presentToast();
-    }
+    this.getRides();
+    // this.presentToast();
+  }
+
+  getRides() {
+    this.rideService.getRides(this.userId).subscribe(ride => {
+      this.rides = ride;
+      console.log(this.rides);
+    });
   }
 
   viewRide() {
