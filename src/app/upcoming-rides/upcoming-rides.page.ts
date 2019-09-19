@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { ToastController, AlertController } from '@ionic/angular';
 import { RideService } from '../services/ride.service/ride.service';
-import { UserServiceService } from '../services/user-service/user-service.service';
 
 @Component({
   selector: 'app-upcoming-rides',
@@ -10,10 +9,14 @@ import { UserServiceService } from '../services/user-service/user-service.servic
 })
 export class UpcomingRidesPage implements OnInit {
 
-  userId = 'N4t9BinxRDhBtNwFEMEI';
+  userId = 'XpLThkfoeYcPTquTA2RIcoCLuO12';
   rides = null;
+  status: string;
 
-  constructor(private toastController: ToastController, private rideService: RideService) {
+  constructor(
+    private toastController: ToastController,
+    private rideService: RideService,
+    private alertController: AlertController) {
 
   }
 
@@ -31,6 +34,40 @@ export class UpcomingRidesPage implements OnInit {
 
   viewRide() {
 
+  }
+
+  async cancelRide(ride) {
+    const header = 'Cancel ride';
+    const message = 'Do you really want to cancel the ride?';
+    this.showCancelAlert(ride, header, message)
+  }
+
+  async showCancelAlert(ride, header, message) {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          cssClass: 'danger',
+          handler: (exit) => {
+            console.log('Confirm Cancel:', exit);
+          }
+        }, {
+          text: 'Yes',
+          handler: () => {
+            ride.status = 'cancelled';
+            console.log(ride);
+            this.rideService.cancelRide(ride).then(() => {
+              console.log('cancelled', ride);
+            });
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   async presentToast() {

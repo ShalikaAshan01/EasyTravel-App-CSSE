@@ -21,10 +21,10 @@
     </ng-container>
 
     <div class="ion-text-center" *ngIf="rides">
-      <ion-text color="light">Swipe left to edit ride.</ion-text>
+      <ion-text color="light">Click to see more. Swipe left to cancel ride.</ion-text>
     </div>
     <div *ngFor="let ride of rides">
-      <ion-item-sliding *ngIf="ride.status != 'completed'">
+      <ion-item-sliding *ngIf="ride.status == 'upcoming' || ride.status == 'ongoing'">
         <ion-item lines="inset" button [color]="ride.status == 'ongoing' ? 'success' : ''">
           <ion-icon slot="start" [color]="ride.status == 'ongoing' ? 'secondary' : 'danger'"
             [name]="ride.status == 'ongoing' ? 'rocket' : 'today'"></ion-icon>
@@ -46,10 +46,10 @@
           </ion-note>
         </ion-item>
 
-        <ion-item-options side="end">
-          <ion-item-option color="primary">
-            Extend
-            <ion-icon name="create" slot="end"></ion-icon>
+        <ion-item-options side="end" *ngIf="ride.status != 'ongoing'">
+          <ion-item-option color="danger" (click)="cancelRide(ride)">
+            Cancel
+            <ion-icon name="close" slot="end"></ion-icon>
           </ion-item-option>
         </ion-item-options>
       </ion-item-sliding>

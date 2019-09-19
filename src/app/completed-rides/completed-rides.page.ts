@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Ride, RideService } from '../services/ride.service/ride.service';
-import { AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-completed-rides',
@@ -11,7 +8,7 @@ import { map } from 'rxjs/operators';
 })
 export class CompletedRidesPage implements OnInit {
 
-  userId = 'N4t9BinxRDhBtNwFEMEI';
+  userId = 'XpLThkfoeYcPTquTA2RIcoCLuO12';
   rides: Ride[];
 
   constructor(private rideService: RideService) {
