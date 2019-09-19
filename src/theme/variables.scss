@@ -76,6 +76,11 @@
   --ion-color-light-tint: #f5f6f9;
 }
 
+ion-toolbar {
+  --background: var(--ion-color-dark);
+  --color: white;
+}
+
 @font-face {
   font-family: Maven-Pro;
   src: url("../assets/fonts/MavenPro-Regular.ttf");

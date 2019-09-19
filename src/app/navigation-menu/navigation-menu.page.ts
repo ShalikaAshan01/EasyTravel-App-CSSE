@@ -17,6 +17,21 @@ export class NavigationMenuPage implements OnInit {
       icon: 'home'
     },
     {
+      title: 'Routes',
+      url: '/menu/routes',
+      icon: 'bus'
+    },
+    {
+      title: 'History',
+      url: '/menu/history',
+      icon: 'time'
+    },
+    {
+      title: 'Recharge',
+      url: '/menu/recharge',
+      icon: 'card'
+    },
+    {
       title: 'Settings',
       url: '/menu/settings',
       icon: 'cog'
