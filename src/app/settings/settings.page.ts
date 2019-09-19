@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-settings',
@@ -24,7 +25,8 @@ export class SettingsPage implements OnInit {
     private storage: Storage,
     private firestore: AngularFirestore,
     private router: Router,
-    public alertController: AlertController) { }
+    public alertController: AlertController,
+    public navCtrl: NavController) { }
 
   ngOnInit() {
     this.storage.get('user').then((val) => {
@@ -75,7 +77,7 @@ export class SettingsPage implements OnInit {
         {
           text: 'Okay',
           handler: () => {
-            this.router.navigate(['menu/home']);
+            this.navCtrl.navigateRoot(['menu/home']);
           }
         }
       ]
