@@ -21,6 +21,10 @@ export class RideService {
 
   constructor(private fireStore: AngularFirestore) { }
 
+  getRide(rideId) {
+    return this.fireStore.collection('rides').doc<Ride>(rideId).valueChanges();
+  }
+
   getRides(userId) {
     return this.fireStore.collection<Ride>('rides', ref => ref.where('passenger', '==', userId)).snapshotChanges().pipe(
       map(actions => {
@@ -30,7 +34,7 @@ export class RideService {
           return { id, ...data };
         });
       })
-    );;
+    );
   }
 
   cancelRide(ride) {

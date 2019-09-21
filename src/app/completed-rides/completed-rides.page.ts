@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Ride, RideService } from '../services/ride.service/ride.service';
+import { ModalController } from '@ionic/angular';
+import { RideDetailsModalPage } from '../ride-details-modal/ride-details-modal.page';
 
 @Component({
   selector: 'app-completed-rides',
@@ -11,7 +13,7 @@ export class CompletedRidesPage implements OnInit {
   userId = 'XpLThkfoeYcPTquTA2RIcoCLuO12';
   rides: Ride[];
 
-  constructor(private rideService: RideService) {
+  constructor(private rideService: RideService, private modalController: ModalController) {
 
   }
 
@@ -21,9 +23,23 @@ export class CompletedRidesPage implements OnInit {
 
   getRides() {
     this.rideService.getRides(this.userId).subscribe(ride => {
-      this.rides = ride;
-      console.log(this.rides);
+      this.rides = null;
+      ride.forEach(element => {
+        if (element.status == 'previous' || element.status == 'cancelled') {
+          this.rides = ride;
+        }
+      });
     });
+  }
+
+  async viewRide(ride) {
+    const modal = await this.modalController.create({
+      component: RideDetailsModalPage,
+      componentProps: {
+        'ride': ride
+      }
+    });
+    return await modal.present();
   }
 
   removeRide(rideId) {

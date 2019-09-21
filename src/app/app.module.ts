@@ -15,17 +15,19 @@ import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { IonicStorageModule } from '@ionic/storage';
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
+import { RideDetailsModalPageModule } from './ride-details-modal/ride-details-modal.module';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-    BrowserModule, 
-    IonicModule.forRoot(), 
+    BrowserModule,
+    IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase, 'test'),
     AngularFirestoreModule,
     AngularFireDatabaseModule,
+    RideDetailsModalPageModule,
     IonicStorageModule.forRoot()
   ],
   providers: [
@@ -36,4 +38,4 @@ import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ng
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

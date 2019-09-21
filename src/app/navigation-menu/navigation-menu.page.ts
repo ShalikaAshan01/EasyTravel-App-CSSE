@@ -19,12 +19,12 @@ export class NavigationMenuPage implements OnInit {
     {
       title: 'Routes',
       url: '/menu/routes',
-      icon: 'bus'
+      icon: 'navigate'
     },
     {
-      title: 'History',
+      title: 'My Rides',
       url: '/menu/history',
-      icon: 'time'
+      icon: 'swap'
     },
     {
       title: 'Recharge',
@@ -71,7 +71,7 @@ export class NavigationMenuPage implements OnInit {
           this.phoneNumber = this.userAccount.phoneNumber;
         });
     });
-  
+
   }
 
   ngOnInit() {

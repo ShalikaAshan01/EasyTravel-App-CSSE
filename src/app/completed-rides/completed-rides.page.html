@@ -12,12 +12,28 @@
   <ion-list>
 
     <ng-container *ngIf="!rides">
-      <div *ngFor="let n of [0, 1, 2, 3]" padding>
-        <ion-skeleton-text></ion-skeleton-text>
-        <p>
-          <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
-        </p>
-      </div>
+      <ion-item *ngFor="let n of [0, 1, 2, 3]">
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <p>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+        <ion-thumbnail slot="end">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+      </ion-item>
     </ng-container>
 
     <div class="ion-text-center" *ngIf="rides">
@@ -25,7 +41,8 @@
     </div>
     <div *ngFor="let ride of rides">
       <!-- <ion-item-sliding *ngIf="ride.status == 'previous'"> -->
-      <ion-item *ngIf="ride.status == 'previous' || ride.status == 'cancelled'" lines="inset" button>
+      <ion-item *ngIf="ride.status == 'previous' || ride.status == 'cancelled'" (click)="viewRide(ride)" lines="inset"
+        button>
         <ion-icon slot="start" [color]="ride.status == 'previous' ? 'success' : 'danger'"
           [name]="ride.status == 'previous' ? 'checkmark-circle' : 'close-circle'"></ion-icon>
         <ion-label>
@@ -33,11 +50,11 @@
           <h2>LKR {{ride.ticketAmount}}</h2>
           <h2>{{ride.status}}</h2>
           <div *ngIf="ride.status == 'previous'">
-            <p>Ride started: {{ride.startTime}}</p>
-            <p>Ride ended: {{ride.endTime}}</p>
+            <p>Started: {{ride.startTime.toDate() | date: 'MMM d, y, h:mm a'}}</p>
+            <p>Ended: {{ride.endTime.toDate() | date: 'MMM d, y, h:mm a'}}</p>
           </div>
           <p *ngIf="ride.status == 'cancelled'">
-            Booked on: {{ride.createdAt}}
+            Booked: {{ride.createdAt.toDate() | date: 'MMM d, y, h:mm a'}}
           </p>
         </ion-label>
         <ion-note slot="end" color="success" text-center>

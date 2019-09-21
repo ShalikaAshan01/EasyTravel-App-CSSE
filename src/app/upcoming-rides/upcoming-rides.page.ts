@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController, AlertController } from '@ionic/angular';
+import { ToastController, AlertController, ModalController } from '@ionic/angular';
 import { RideService } from '../services/ride.service/ride.service';
+import { RideDetailsModalPage } from '../ride-details-modal/ride-details-modal.page';
 
 @Component({
   selector: 'app-upcoming-rides',
@@ -16,7 +17,8 @@ export class UpcomingRidesPage implements OnInit {
   constructor(
     private toastController: ToastController,
     private rideService: RideService,
-    private alertController: AlertController) {
+    private alertController: AlertController,
+    private modalController: ModalController) {
 
   }
 
@@ -27,13 +29,23 @@ export class UpcomingRidesPage implements OnInit {
 
   getRides() {
     this.rideService.getRides(this.userId).subscribe(ride => {
-      this.rides = ride;
-      console.log(this.rides);
+      this.rides = null;
+      ride.forEach(element => {
+        if (element.status == 'upcoming' || element.status == 'ongoing') {
+          this.rides = ride;
+        }
+      });
     });
   }
 
-  viewRide() {
-
+  async viewRide(ride) {
+    const modal = await this.modalController.create({
+      component: RideDetailsModalPage,
+      componentProps: {
+        'ride': ride
+      }
+    });
+    return await modal.present();
   }
 
   async cancelRide(ride) {
@@ -52,15 +64,14 @@ export class UpcomingRidesPage implements OnInit {
           role: 'cancel',
           cssClass: 'danger',
           handler: (exit) => {
-            console.log('Confirm Cancel:', exit);
+
           }
         }, {
           text: 'Yes',
           handler: () => {
             ride.status = 'cancelled';
-            console.log(ride);
             this.rideService.cancelRide(ride).then(() => {
-              console.log('cancelled', ride);
+
             });
           }
         }
