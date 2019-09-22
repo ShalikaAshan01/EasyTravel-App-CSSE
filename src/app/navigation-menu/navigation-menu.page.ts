@@ -52,13 +52,17 @@ export class NavigationMenuPage implements OnInit {
   phoneNumber: any;
 
   constructor(private router: Router, private storage: Storage, private firestore: AngularFirestore) {
-    // var userAcc = {
-    //   userId: 'kT9HbHVP8eXNDeubcaomjUXMOBm1',
-    // }
-    // storage.set('user', userAcc);
+
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedPath = event.url;
     });
+
+    var userAcc = {
+      userId: 'XpLThkfoeYcPTquTA2RIcoCLuO12',
+    }
+
+    storage.set('user', userAcc);
+
     this.storage.get('user').then((val) => {
       this.userId = val.userId;
       this.firestore.collection('passengers').doc(this.userId).valueChanges()

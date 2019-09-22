@@ -26,7 +26,7 @@ export class UserServiceService {
   }
 
   checkUser(userId) {
-    return this.firestore.collection('passengers').doc(userId).get();
+    return this.firestore.collection('passengers').doc(userId);
   }
 
   updateUser(userId, userObj) {

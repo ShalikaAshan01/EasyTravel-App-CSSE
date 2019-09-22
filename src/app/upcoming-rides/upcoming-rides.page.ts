@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ToastController, AlertController, ModalController } from '@ionic/angular';
 import { RideService } from '../services/ride.service/ride.service';
 import { RideDetailsModalPage } from '../ride-details-modal/ride-details-modal.page';
+import { UserServiceService } from '../services/user-service/user-service.service';
+import { Storage } from '@ionic/storage';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-upcoming-rides',
@@ -10,25 +13,34 @@ import { RideDetailsModalPage } from '../ride-details-modal/ride-details-modal.p
 })
 export class UpcomingRidesPage implements OnInit {
 
-  userId = 'XpLThkfoeYcPTquTA2RIcoCLuO12';
+  user: any;
+  userId: any = ' ';
   rides = null;
   status: string;
 
-  constructor(
-    private toastController: ToastController,
-    private rideService: RideService,
-    private alertController: AlertController,
-    private modalController: ModalController) {
+  constructor(private toastController: ToastController, private rideService: RideService, private alertController: AlertController, private modalController: ModalController, private storage: Storage, private fireStore: AngularFirestore) {
+
+    this.storage.get('user').then((val) => {
+      this.userId = val.userId;
+      console.log(val.userId);
+    });
 
   }
 
   ngOnInit() {
-    this.getRides();
+
+    this.fireStore.collection('passengers').doc(this.userId).valueChanges()
+      .subscribe(user => {
+        this.user = user;
+        this.getRides(this.userId);
+      });
+
     // this.presentToast();
   }
 
-  getRides() {
-    this.rideService.getRides(this.userId).subscribe(ride => {
+  async getRides(userId) {
+
+    await this.rideService.getRides(userId).subscribe(ride => {
       this.rides = null;
       ride.forEach(element => {
         if (element.status == 'upcoming' || element.status == 'ongoing') {

@@ -32,14 +32,6 @@
                   <h6><strong>{{ride.status}}</strong></h6>
                 </ion-note>
               </ion-item>
-              <!-- <ion-item lines="none">
-                <ion-label>
-                  <h2><strong>Ride Status</strong></h2>
-                </ion-label>
-                <ion-note slot="end">
-                  <h6><strong>{{ride.status}}</strong></h6>
-                </ion-note>
-              </ion-item> -->
 
               <div style="width: 50%; margin: auto; text-align:center">
                 <img src="./../../assets/images/logo.png" alt="" />
@@ -48,7 +40,7 @@
               <form (ngSubmit)="login()">
                 <ion-list>
                   <ion-item lines="none">
-                    <ion-label>Route</ion-label>
+                    <ion-label>Bus Route</ion-label>
                     <ion-select value="{{ride.route}}" okText="Okay" cancelText="Dismiss">
                       <ion-select-option value="brown">Brown</ion-select-option>
                       <ion-select-option value="blonde">Blonde</ion-select-option>
@@ -57,7 +49,7 @@
                     </ion-select>
                   </ion-item>
                   <ion-item lines="none">
-                    <ion-label>Start</ion-label>
+                    <ion-label>Start Point</ion-label>
                     <ion-select value="{{ride.startPoint}}" okText="Okay" cancelText="Dismiss">
                       <ion-select-option value="brown">Brown</ion-select-option>
                       <ion-select-option value="blonde">Blonde</ion-select-option>
@@ -66,7 +58,7 @@
                     </ion-select>
                   </ion-item>
                   <ion-item lines="none">
-                    <ion-label>End</ion-label>
+                    <ion-label>End Point</ion-label>
                     <ion-select value="{{ride.endPoint}}" okText="Okay" cancelText="Dismiss">
                       <ion-select-option value="brown">Brown</ion-select-option>
                       <ion-select-option value="blonde">Blonde</ion-select-option>
@@ -75,7 +67,7 @@
                     </ion-select>
                   </ion-item>
                   <ion-item lines="none">
-                    <ion-label>Extend</ion-label>
+                    <ion-label>Extend to</ion-label>
                     <ion-select value="" okText="Okay" cancelText="Dismiss">
                       <ion-select-option value="brown">Brown</ion-select-option>
                       <ion-select-option value="blonde">Blonde</ion-select-option>
