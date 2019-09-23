@@ -22,18 +22,19 @@ export class UpcomingRidesPage implements OnInit {
 
     this.storage.get('user').then((val) => {
       this.userId = val.userId;
-      console.log(val.userId);
+      console.log(val);
+
+      this.fireStore.collection('passengers').doc(this.userId).valueChanges()
+        .subscribe(user => {
+          this.user = user;
+          this.getRides(this.userId);
+        });
+
     });
 
   }
 
   ngOnInit() {
-
-    this.fireStore.collection('passengers').doc(this.userId).valueChanges()
-      .subscribe(user => {
-        this.user = user;
-        this.getRides(this.userId);
-      });
 
     // this.presentToast();
   }

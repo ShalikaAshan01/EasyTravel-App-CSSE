@@ -13,7 +13,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class CompletedRidesPage implements OnInit {
 
-  userId: any = 'XpLThkfoeYcPTquTA2RIcoCLuO12';
+  userId: any = ' ';
   // userId: any = ' ';
   user: any;
   rides: Ride[];
@@ -21,20 +21,21 @@ export class CompletedRidesPage implements OnInit {
   constructor(private rideService: RideService, private modalController: ModalController, private storage: Storage, private fireStore: AngularFirestore) {
 
     this.storage.get('user').then((val) => {
-      this.user = val;
-      this.userId = this.user.userId;
-      console.log(this.user.userId);
+      this.userId = val.userId;
+      console.log(val);
+
+      this.fireStore.collection('passengers').doc(this.userId).valueChanges()
+        .subscribe(user => {
+          this.user = user;
+          this.getRides(this.userId);
+        });
+
     });
 
   }
 
   ngOnInit() {
 
-    this.fireStore.collection('passengers').doc(this.userId).valueChanges()
-      .subscribe(user => {
-        this.user = user;
-        this.getRides(this.userId);
-      });
 
   }
 

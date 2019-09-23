@@ -8,5 +8,58 @@
 </ion-header>
 
 <ion-content>
+  <ion-progress-bar *ngIf="showProgressBar" type="indeterminate" color="dark"></ion-progress-bar>
+  <ion-grid>
+    <ion-grid class="content">
 
+      <ion-row justify-content-center>
+
+        <ion-col align-self-center size-lg="6">
+          <ion-row>
+            <ion-col>
+
+              <form (ngSubmit)="rechargeAccount()">
+
+                <ion-item lines="none">
+                  <ion-label position="stacked">Payment Amount </ion-label>
+                  <ion-input [(ngModel)]="rechargeAmount" name="rechargeAmount" color="dark" type="number"
+                    placeholder="1000.00">
+                  </ion-input>
+                </ion-item>
+                <ion-item lines="none">
+                  <ion-label position="stacked">Name on Card</ion-label>
+                  <ion-input [(ngModel)]="cardName" name="cardName" color="dark" type="text">
+                  </ion-input>
+                </ion-item>
+                <ion-item lines="none">
+                  <ion-label position="stacked">Card Number</ion-label>
+                  <ion-input [(ngModel)]="firstname" name="firstname" color="dark" type="number"
+                    placeholder="16 digits">
+                  </ion-input>
+                </ion-item>
+                <ion-item lines="none">
+                  <ion-label position="stacked">Expiry Date</ion-label>
+                  <ion-input [(ngModel)]="lastname" name="lastname" color="dark" type="text" placeholder="MM/YY">
+                  </ion-input>
+                </ion-item>
+                <ion-item lines="none">
+                  <ion-label position="stacked">CVV</ion-label>
+                  <ion-input [(ngModel)]="nic" name="nic" color="dark" type="text" placeholder="1234">
+                  </ion-input>
+                </ion-item>
+
+                <ion-item lines="none">
+                  <ion-button expand="full" color="dark" class="btn-secondary" type="submit">Recharge</ion-button>
+                </ion-item>
+                <p text-center>Always keep your account recharged.</p>
+              </form>
+
+            </ion-col>
+          </ion-row>
+        </ion-col>
+
+      </ion-row>
+
+    </ion-grid>
+  </ion-grid>
 </ion-content>

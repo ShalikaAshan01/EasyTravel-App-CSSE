@@ -16,6 +16,8 @@ export class RideDetailsModalPage implements OnInit {
   user: any;
   accountBalance: any;
 
+  extend: any;
+
   constructor(private modalController: ModalController, private navParams: NavParams, private storage: Storage, private userService: UserServiceService) {
     this.ride = navParams.get('ride');
 

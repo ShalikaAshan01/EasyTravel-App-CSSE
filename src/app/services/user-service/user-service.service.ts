@@ -33,4 +33,8 @@ export class UserServiceService {
     return this.firestore.collection('passengers').doc(userId).update(userObj);
   }
 
+  rechargeAccount(userId, user) {
+    return this.firestore.collection('passengers').doc(userId).update(user)
+  }
+
 }

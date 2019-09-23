@@ -45,7 +45,7 @@ export class NavigationMenuPage implements OnInit {
 
   selectedPath = '';
   userAccount: any;
-  accBalance: any;
+  accBalance: number;
   lname: any;
   fname: any;
   userId: any;
