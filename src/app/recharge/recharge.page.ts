@@ -39,10 +39,18 @@ export class RechargePage implements OnInit {
     const header = 'Confirm Payment?';
     const message = 'Do you really want to confirm your payment?';
     this.accountBalance += this.rechargeAmount;
-    this.showRechargeAlert(this.user, header, message);
+    console.log(this.accountBalance);
+    this.showRechargeAlert(header, message);
   }
 
-  async showRechargeAlert(user, header, message) {
+  updateUser(user) {
+    user.accountBalance = this.accountBalance;
+    this.userService.rechargeAccount(this.userId, this.user).then(() => { }
+    );
+    this.rechargeAmount = 0;
+  }
+
+  async showRechargeAlert(header, message) {
     const alert = await this.alertController.create({
       header: header,
       message: message,
@@ -58,16 +66,21 @@ export class RechargePage implements OnInit {
           text: 'Yes',
           handler: () => {
             // IF YES
-            user.accountBalance = this.accountBalance;
-            this.userService.rechargeAccount(this.userId, this.user).then(() => {
-              console.log(this.rechargeAmount);
-            }
-            );
-            this.rechargeAmount = 0;
-            console.log(this.accountBalance);
+            this.updateUser(this.user);
+            this.showSuccess();
           }
         }
       ]
+    });
+
+    await alert.present();
+  }
+
+  async showSuccess() {
+    const alert = await this.alertController.create({
+      header: 'Success',
+      message: 'Your Account is recharged',
+      buttons: ['OK']
     });
 
     await alert.present();

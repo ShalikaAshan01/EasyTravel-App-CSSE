@@ -1,6 +1,16 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
+export interface Passenger {
+  firstName: string,
+  lastname: string,
+  accountbalance: number,
+  phoneNumber: string,
+  nic: string,
+  status: string,
+  createdDate: string
+}
+
 @Injectable({
   providedIn: 'root'
 })

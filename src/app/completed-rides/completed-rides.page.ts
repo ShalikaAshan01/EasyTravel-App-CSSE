@@ -3,7 +3,6 @@ import { Ride, RideService } from '../services/ride.service/ride.service';
 import { ModalController } from '@ionic/angular';
 import { RideDetailsModalPage } from '../ride-details-modal/ride-details-modal.page';
 import { Storage } from '@ionic/storage';
-import { UserServiceService } from '../services/user-service/user-service.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
@@ -14,15 +13,14 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class CompletedRidesPage implements OnInit {
 
   userId: any = ' ';
-  // userId: any = ' ';
   user: any;
   rides: Ride[];
 
-  constructor(private rideService: RideService, private modalController: ModalController, private storage: Storage, private fireStore: AngularFirestore) {
+  constructor(private rideService: RideService, private modalController: ModalController, private storage: Storage,
+    private fireStore: AngularFirestore) {
 
     this.storage.get('user').then((val) => {
       this.userId = val.userId;
-      console.log(val);
 
       this.fireStore.collection('passengers').doc(this.userId).valueChanges()
         .subscribe(user => {

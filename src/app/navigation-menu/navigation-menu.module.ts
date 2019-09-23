@@ -15,7 +15,8 @@ const routes: Routes = [
       { path: 'home', loadChildren: '../home/home.module#HomePageModule' },
       { path: 'history', loadChildren: '../history/history.module#HistoryPageModule' },
       { path: 'recharge', loadChildren: '../recharge/recharge.module#RechargePageModule' },
-      { path: 'settings', loadChildren: '../settings/settings.module#SettingsPageModule' }
+      { path: 'settings', loadChildren: '../settings/settings.module#SettingsPageModule' },
+      { path: 'book-ride', loadChildren: '../book-ride/book-ride.module#BookRidePageModule' }
     ]
   }
 ];

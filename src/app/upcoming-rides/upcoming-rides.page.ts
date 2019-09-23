@@ -15,21 +15,26 @@ export class UpcomingRidesPage implements OnInit {
 
   user: any;
   userId: any = ' ';
+  accountBalance: number = 0;
+  ticketAmount: number = 0;
+
   rides = null;
   status: string;
 
-  constructor(private toastController: ToastController, private rideService: RideService, private alertController: AlertController, private modalController: ModalController, private storage: Storage, private fireStore: AngularFirestore) {
+  constructor(private toastController: ToastController, private rideService: RideService, private alertController: AlertController,
+    private modalController: ModalController, private storage: Storage, private fireStore: AngularFirestore,
+    private userService: UserServiceService) {
 
     this.storage.get('user').then((val) => {
       this.userId = val.userId;
-      console.log(val);
 
       this.fireStore.collection('passengers').doc(this.userId).valueChanges()
         .subscribe(user => {
           this.user = user;
+          this.accountBalance = this.user.accountBalance;
           this.getRides(this.userId);
+          console.log(this.user.accountBalance);
         });
-
     });
 
   }
@@ -40,7 +45,6 @@ export class UpcomingRidesPage implements OnInit {
   }
 
   async getRides(userId) {
-
     await this.rideService.getRides(userId).subscribe(ride => {
       this.rides = null;
       ride.forEach(element => {
@@ -64,7 +68,19 @@ export class UpcomingRidesPage implements OnInit {
   async cancelRide(ride) {
     const header = 'Cancel ride';
     const message = 'Do you really want to cancel the ride?';
+    this.ticketAmount = ride.ticketAmount;
     this.showCancelAlert(ride, header, message)
+  }
+
+  updateRide(ride) {
+    ride.status = 'cancelled';
+    this.rideService.cancelRide(ride).then(() => { });
+  }
+
+  updateUser(user) {
+    user.accountBalance = this.accountBalance + this.ticketAmount;
+    console.log(user.accountBalance)
+    this.userService.updateUser(this.userId, user).then(() => { });
   }
 
   async showCancelAlert(ride, header, message) {
@@ -82,10 +98,8 @@ export class UpcomingRidesPage implements OnInit {
         }, {
           text: 'Yes',
           handler: () => {
-            ride.status = 'cancelled';
-            this.rideService.cancelRide(ride).then(() => {
-
-            });
+            this.updateRide(ride);
+            this.updateUser(this.user);
           }
         }
       ]

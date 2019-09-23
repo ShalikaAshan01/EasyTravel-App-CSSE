@@ -22,7 +22,7 @@ export class NavigationMenuPage implements OnInit {
       icon: 'navigate'
     },
     {
-      title: 'My Rides',
+      title: 'Ride History',
       url: '/menu/history',
       icon: 'swap'
     },
@@ -68,11 +68,11 @@ export class NavigationMenuPage implements OnInit {
       this.firestore.collection('passengers').doc(this.userId).valueChanges()
         .subscribe(_user => {
           this.userAccount = _user;
-          console.log(this.userAccount);
           this.fname = this.userAccount.firstName;
           this.lname = this.userAccount.lastName;
           this.accBalance = this.userAccount.accountBalance;
           this.phoneNumber = this.userAccount.phoneNumber;
+          // console.log(this.userAccount);
         });
     });
 
