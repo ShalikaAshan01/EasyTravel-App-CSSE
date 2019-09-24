@@ -15,6 +15,8 @@ export class CompletedRidesPage implements OnInit {
   userId: any = ' ';
   user: any;
   rides: Ride[];
+  bus: any;
+  regNo: any;
 
   constructor(private rideService: RideService, private modalController: ModalController, private storage: Storage,
     private fireStore: AngularFirestore) {
@@ -45,6 +47,14 @@ export class CompletedRidesPage implements OnInit {
         if (element.status == 'upcoming' || element.status == 'ongoing') {
           this.rides = ride;
         }
+
+        if (element.status == 'previous') {
+          this.rideService.getBus(element.bus).subscribe(bus => {
+            this.bus = bus;
+            this.regNo = this.bus.regNo.toUpperCase();
+          })
+        }
+
       });
     });
 

@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Routes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="routes">
+    <ion-item *ngFor="let n of [0, 1, 2, 3]">
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <p>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+      <ion-thumbnail slot="end">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+    </ion-item>
+  </ng-container>
+
+  <div *ngIf="!routes">
+    <ion-item>
+      <ion-icon slot="start" name="navigate" color="dark"></ion-icon>
+      <ion-label>
+        <h2><strong>Kaduwela - Kollupitiya</strong></h2>
+      </ion-label>
+      <ion-note slot="end" color="success" no-margin>
+        <h2 mo-margin no-padding>177</h2>
+      </ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon slot="start" name="navigate" color="dark"></ion-icon>
+      <ion-label>
+        <h2><strong>Meegoda - Pettah</strong></h2>
+      </ion-label>
+      <ion-note slot="end" color="success" no-margin>
+        <h2 mo-margin no-padding>190</h2>
+      </ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon slot="start" name="navigate" color="dark"></ion-icon>
+      <ion-label>
+        <h2><strong>Maharagama - Malabe</strong></h2>
+      </ion-label>
+      <ion-note slot="end" color="success" no-margin>
+        <h2 mo-margin no-padding>993</h2>
+      </ion-note>
+    </ion-item>
+
+  </div>
+</ion-content>

@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'menu', redirectTo: 'menu/home', pathMatch: 'full' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'menu', loadChildren: './navigation-menu/navigation-menu.module#NavigationMenuPageModule' }
+
 ];
 
 @NgModule({

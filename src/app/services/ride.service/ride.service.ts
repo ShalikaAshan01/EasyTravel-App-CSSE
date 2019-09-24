@@ -37,6 +37,10 @@ export class RideService {
     );
   }
 
+  getBus(busId) {
+    return this.fireStore.collection('buses').doc(busId).valueChanges();
+  }
+
   cancelRide(ride) {
     return this.fireStore.collection('rides').doc(ride.id).update(ride);
   }

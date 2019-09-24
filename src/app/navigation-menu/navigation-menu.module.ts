@@ -13,6 +13,7 @@ const routes: Routes = [
     component: NavigationMenuPage,
     children: [
       { path: 'home', loadChildren: '../home/home.module#HomePageModule' },
+      { path: 'routes', loadChildren: '../routes/routes.module#RoutesPageModule' },
       { path: 'history', loadChildren: '../history/history.module#HistoryPageModule' },
       { path: 'recharge', loadChildren: '../recharge/recharge.module#RechargePageModule' },
       { path: 'settings', loadChildren: '../settings/settings.module#SettingsPageModule' },

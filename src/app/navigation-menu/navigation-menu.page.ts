@@ -24,7 +24,7 @@ export class NavigationMenuPage implements OnInit {
     {
       title: 'Ride History',
       url: '/menu/history',
-      icon: 'swap'
+      icon: 'time'
     },
     {
       title: 'Recharge',

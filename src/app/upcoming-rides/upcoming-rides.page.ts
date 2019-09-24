@@ -20,6 +20,8 @@ export class UpcomingRidesPage implements OnInit {
 
   rides = null;
   status: string;
+  bus: any;
+  regNo: any;
 
   constructor(private toastController: ToastController, private rideService: RideService, private alertController: AlertController,
     private modalController: ModalController, private storage: Storage, private fireStore: AngularFirestore,
@@ -33,7 +35,6 @@ export class UpcomingRidesPage implements OnInit {
           this.user = user;
           this.accountBalance = +this.user.accountBalance;
           this.getRides(this.userId);
-          console.log(this.user.accountBalance);
         });
     });
 
@@ -51,9 +52,19 @@ export class UpcomingRidesPage implements OnInit {
         if (element.status == 'upcoming' || element.status == 'ongoing') {
           this.rides = ride;
         }
+
+        if (element.status == 'ongoing') {
+          this.rideService.getBus(element.bus).subscribe(bus => {
+            this.bus = bus;
+            this.regNo = this.bus.regNo.toUpperCase();
+          })
+        }
+
       });
     });
   }
+
+
 
   async viewRide(ride) {
     const modal = await this.modalController.create({

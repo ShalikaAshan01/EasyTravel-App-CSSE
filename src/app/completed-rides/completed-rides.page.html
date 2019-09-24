@@ -37,7 +37,7 @@
     </ng-container>
 
     <div class="ion-text-center" *ngIf="rides">
-      <ion-text color="light">Click to see more.</ion-text>
+      <ion-text color="light">Tap to see more.</ion-text>
     </div>
     <div *ngFor="let ride of rides">
       <!-- <ion-item-sliding *ngIf="ride.status == 'previous'"> -->
@@ -58,7 +58,9 @@
           </p>
         </ion-label>
         <ion-note slot="end" color="success" text-center>
-          <p *ngIf="ride.status == 'previous'">WP-NAB-4578</p>
+          <p *ngIf="ride.status == 'previous' && regNo != null">
+            {{regNo}}
+          </p>
           <h3>{{ride.route}}</h3>
           <p>Route</p>
         </ion-note>

@@ -28,28 +28,30 @@
                 </ion-item>
                 <ion-item lines="none">
                   <ion-label position="stacked">Name on Card</ion-label>
-                  <ion-input [(ngModel)]="cardName" name="cardName" color="dark" type="text">
+                  <ion-input [(ngModel)]="cardName" name="cardName" color="dark" type="text" placeholder="John Doe">
                   </ion-input>
                 </ion-item>
                 <ion-item lines="none">
                   <ion-label position="stacked">Card Number</ion-label>
-                  <ion-input [(ngModel)]="firstname" name="firstname" color="dark" type="number"
+                  <ion-input [(ngModel)]="cardNumber" name="cardNumber" color="dark" type="number"
                     placeholder="16 digits">
                   </ion-input>
                 </ion-item>
                 <ion-item lines="none">
                   <ion-label position="stacked">Expiry Date</ion-label>
-                  <ion-input [(ngModel)]="lastname" name="lastname" color="dark" type="text" placeholder="MM/YY">
+                  <ion-input [(ngModel)]="expDate" name="expDate" color="dark" type="text" placeholder="MM/YY">
                   </ion-input>
                 </ion-item>
                 <ion-item lines="none">
                   <ion-label position="stacked">CVV</ion-label>
-                  <ion-input [(ngModel)]="nic" name="nic" color="dark" type="text" placeholder="1234">
+                  <ion-input [(ngModel)]="cvv" name="cvv" color="dark" type="text" placeholder="123">
                   </ion-input>
                 </ion-item>
 
                 <ion-item lines="none">
-                  <ion-button expand="full" color="dark" class="btn-secondary" type="submit">Recharge</ion-button>
+                  <ion-button expand="full" color="dark" class="btn-secondary" type="submit">
+                    Recharge
+                  </ion-button>
                 </ion-item>
                 <p text-center>Always keep your account recharged.</p>
               </form>
