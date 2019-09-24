@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>qr</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div>
+        <ngx-qrcode [qrc-value]="qrData" [qrc-element-type]="elementType" qrc-class="qr-class">
+          </ngx-qrcode>
+    </div>
+    <ion-button (click)="extend()">Extend Trip</ion-button>
+</ion-content>

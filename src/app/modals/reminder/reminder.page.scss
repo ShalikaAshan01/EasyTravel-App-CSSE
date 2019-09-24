@@ -1,0 +1,43 @@
+ion-content {
+    background-color: rgba(199, 11, 11, 0.507) !important;
+    background: transparent !important;
+}
+
+.thealert {
+    background: rgb(207, 166, 166) !important;
+    border-radius: 25px;
+    width: 90%;
+
+    .logoholder {
+        width: 250px;
+        height: 180px;
+        margin-left: auto;
+        margin-right: auto;
+
+        // margin-top: 0px;
+        img {
+            width: 250px;
+            height: 250px;
+        }
+    }
+
+
+    .btnshlder {
+        margin-bottom: 20px;
+
+        button {
+            background-color: #FFA638 !important;
+            color: white !important;
+            border-radius: 10px !important;
+            height: 40px !important;
+            width: 80px !important;
+        }
+    }
+}
+
+.desholder {
+    // width: 30% !important;
+    padding: 0px 10px;
+    margin-left: auto;
+    margin-right: auto;
+}

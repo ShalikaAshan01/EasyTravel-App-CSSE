@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>testPage</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+<div *ngIf="status=='created'">
+    <!-- <ngx-qrcode [qrc-value]="qrData" [qrc-element-type]="elementType" qrc-class="qr-class">
+      </ngx-qrcode> -->
+</div>
+    <h4>Account Balance {{accountBalance}}</h4>
+    <ion-item>
+      <ion-label>Select Route</ion-label>
+      <ion-select value="" okText="Okay" [(ngModel)]="route" (ionChange)="routeSelect($event)" cancelText="Dismiss">
+
+        <ion-select-option *ngFor="let route of routes" value="{{route.id}}">{{route.routeNo}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>Select Start</ion-label>
+      <ion-select value="" okText="Okay" [(ngModel)]="start" (ionChange)="pointSelect($event)" cancelText="Dismiss">
+        <ion-select-option *ngFor="let spoint of sPoints" value="{{spoint.id}}">{{spoint.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>Select End</ion-label>
+      <ion-select value="" okText="Okay" [(ngModel)]="end" (ionChange)="pointSelect($event)" cancelText="Dismiss">
+        <ion-select-option *ngFor="let epoint of ePoints" value="{{epoint.id}}">{{epoint.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  
+    <h4>Amount is: {{amount}}</h4>
+    <h6 *ngIf="bal=='insufficent'">Insufficent Balance...Please recharge</h6>
+    <div *ngIf="bal!='insufficent'">
+        <ion-button (click)="bookNow()">Book Now</ion-button>
+    </div>
+    
+</ion-content>

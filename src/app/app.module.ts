@@ -15,10 +15,18 @@ import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { IonicStorageModule } from '@ionic/storage';
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+
+import { ReminderPage } from './modals/reminder/reminder.page'
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [
+    AppComponent,
+    ReminderPage
+  ],
+  entryComponents: [
+    ReminderPage
+],
   imports: [
     BrowserModule, 
     IonicModule.forRoot(), 
@@ -32,7 +40,8 @@ import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ng
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    FirebaseAuthentication
+    FirebaseAuthentication,
+    LocalNotifications
   ],
   bootstrap: [AppComponent]
 })
