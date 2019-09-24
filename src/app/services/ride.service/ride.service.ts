@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 
 export interface Ride {
@@ -8,6 +7,7 @@ export interface Ride {
   endPoint: string,
   startTime: string,
   endTime: string,
+  bus: string,
   route: string,
   tickectAmount: number,
   status: string,
@@ -19,12 +19,10 @@ export interface Ride {
 })
 export class RideService {
 
-  userId = 'N4t9BinxRDhBtNwFEMEI';
-  private ridesCollection: AngularFirestoreCollection<Ride>;
-  private rides: Observable<Ride[]>;
+  constructor(private fireStore: AngularFirestore) { }
 
-  constructor(private fireStore: AngularFirestore) {
-
+  getRide(rideId) {
+    return this.fireStore.collection('rides').doc<Ride>(rideId).valueChanges();
   }
 
   getRides(userId) {
@@ -36,7 +34,15 @@ export class RideService {
           return { id, ...data };
         });
       })
-    );;
+    );
+  }
+
+  getBus(busId) {
+    return this.fireStore.collection('buses').doc(busId).valueChanges();
+  }
+
+  cancelRide(ride) {
+    return this.fireStore.collection('rides').doc(ride.id).update(ride);
   }
 
   removeRide(rideId) {

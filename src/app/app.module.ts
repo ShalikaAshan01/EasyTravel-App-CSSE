@@ -18,6 +18,7 @@ import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ng
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 import { ReminderPage } from './modals/reminder/reminder.page'
+import { RideDetailsModalPageModule } from './ride-details-modal/ride-details-modal.module';
 
 @NgModule({
   declarations: [
@@ -28,12 +29,13 @@ import { ReminderPage } from './modals/reminder/reminder.page'
     ReminderPage
 ],
   imports: [
-    BrowserModule, 
-    IonicModule.forRoot(), 
+    BrowserModule,
+    IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase, 'test'),
     AngularFirestoreModule,
     AngularFireDatabaseModule,
+    RideDetailsModalPageModule,
     IonicStorageModule.forRoot()
   ],
   providers: [
@@ -45,4 +47,4 @@ import { ReminderPage } from './modals/reminder/reminder.page'
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

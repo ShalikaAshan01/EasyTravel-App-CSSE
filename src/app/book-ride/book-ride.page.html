@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="menu"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Book Ride</ion-title>
+  </ion-toolbar>
+  <ion-item lines="none">
+    <ion-label>
+      <h2><strong>Account Balance</strong></h2>
+    </ion-label>
+    <ion-note slot="end">
+      <ion-badge [color]="1 ? 'success' : 'danger'">
+        <strong>LKR 1000</strong>
+      </ion-badge>
+    </ion-note>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+  <ion-progress-bar *ngIf="showProgressBar" type="indeterminate" color="dark"></ion-progress-bar>
+  <ion-grid>
+    <ion-grid class="content">
+      <ion-row justify-content-center>
+        <ion-col align-self-center size-lg="6">
+          <ion-row>
+            <ion-col>
+
+              <!-- <div style="width: 50%; margin: auto; text-align:center">
+                <img src="./../../assets/images/logo.png" alt="" />
+              </div> -->
+
+              <form (ngSubmit)="login()">
+                <ion-list>
+                  <ion-item lines="none">
+                    <ion-label position="stacked">Bus Route</ion-label>
+                    <ion-select value="" okText="Okay" cancelText="Dismiss">
+                      <ion-select-option value="brown">Brown</ion-select-option>
+                      <ion-select-option value="blonde">Blonde</ion-select-option>
+                      <ion-select-option value="black">Black</ion-select-option>
+                      <ion-select-option value="red">Red</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                  <ion-item lines="none">
+                    <ion-label position="stacked">Start Point</ion-label>
+                    <ion-select value="" okText="Okay" cancelText="Dismiss">
+                      <ion-select-option value="brown">Brown</ion-select-option>
+                      <ion-select-option value="blonde">Blonde</ion-select-option>
+                      <ion-select-option value="black">Black</ion-select-option>
+                      <ion-select-option value="red">Red</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                  <ion-item lines="none">
+                    <ion-label position="stacked">End Point</ion-label>
+                    <ion-select value="" okText="Okay" cancelText="Dismiss">
+                      <ion-select-option value="brown">Brown</ion-select-option>
+                      <ion-select-option value="blonde">Blonde</ion-select-option>
+                      <ion-select-option value="black">Black</ion-select-option>
+                      <ion-select-option value="red">Red</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                  <ion-item lines="none" *ngIf="startPoint == null && endPoint == null">
+                    <ion-note slot="start" color="dark">
+                      <h5><strong>Ticket Price</strong></h5>
+                    </ion-note>
+                    <ion-note slot="end" color="danger">
+                      <h5><strong>LKR 100</strong></h5>
+                    </ion-note>
+                  </ion-item>
+                  <ion-item lines="none">
+                    <ion-button expand="block" class="btn-secondary" color="dark" type="submit">Book Now</ion-button>
+                  </ion-item>
+                  <p text-center>Select your journey to book your ride.</p>
+                </ion-list>
+              </form>
+
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-grid>
+  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="dark" routerLink="/menu/routes">
+      <ion-icon name="time"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+</ion-content>

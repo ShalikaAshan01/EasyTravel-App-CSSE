@@ -13,8 +13,6 @@ const routes: Routes = [
   { path: 'exted', loadChildren: './exted/exted.module#ExtedPageModule' },
   { path: 'reminder', loadChildren: './modals/reminder/reminder.module#ReminderPageModule' }
 
-
-
 ];
 
 @NgModule({

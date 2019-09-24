@@ -27,10 +27,10 @@ export class NavigationMenuPage implements OnInit {
     {
       title: 'Routes',
       url: '/menu/routes',
-      icon: 'bus'
+      icon: 'navigate'
     },
     {
-      title: 'History',
+      title: 'Ride History',
       url: '/menu/history',
       icon: 'time'
     },
@@ -53,7 +53,7 @@ export class NavigationMenuPage implements OnInit {
 
   selectedPath = '';
   userAccount: any;
-  accBalance: any;
+  accBalance: number;
   lname: any;
   fname: any;
   userId: any;
@@ -74,12 +74,12 @@ export class NavigationMenuPage implements OnInit {
       this.firestore.collection('passengers').doc(this.userId).valueChanges()
         .subscribe(_user => {
           this.userAccount = _user;
-          console.log(this.userAccount);
           this.fname = this.userAccount.firstName;
           this.lname = this.userAccount.lastName;
           this.accBalance = this.userAccount.accountBalance;
           this.phoneNumber = this.userAccount.phoneNumber;
           this.storage.set('user', this.userAccount);
+          // console.log(this.userAccount);
         });
       this.rideService.getOngoingRide(this.userId).subscribe(_data => {
         console.log('_data');

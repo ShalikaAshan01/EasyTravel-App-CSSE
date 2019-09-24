@@ -1,5 +1,5 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {Geolocation} from '@ionic-native/geolocation/ngx';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 declare var google;
 
@@ -8,24 +8,24 @@ declare var google;
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit, AfterViewInit{
+export class HomePage implements OnInit, AfterViewInit {
   latitude: any;
   longitude: any;
   @ViewChild('mapElement') mapNativeElement: ElementRef;
   constructor(private geolocation: Geolocation) { }
 
   ngOnInit() {
-    console.log("ddd");
+    // console.log("ddd");
   }
 
   ngAfterViewInit(): void {
-    console.log("ddd");
+    // console.log("ddd");
     this.geolocation.getCurrentPosition().then((resp) => {
       this.latitude = resp.coords.latitude;
       this.longitude = resp.coords.longitude;
       console.log(resp);
       const map = new google.maps.Map(this.mapNativeElement.nativeElement, {
-        center: {lat: -34.397, lng: 150.644},
+        center: { lat: -34.397, lng: 150.644 },
         zoom: 16
       });
       /*location object*/
