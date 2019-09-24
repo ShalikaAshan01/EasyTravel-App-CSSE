@@ -24,7 +24,7 @@ export class RechargePage implements OnInit {
       this.fireStore.collection('passengers').doc(this.userId).valueChanges()
         .subscribe(user => {
           this.user = user;
-          this.accountBalance = this.user.accountBalance;
+          this.accountBalance = +this.user.accountBalance;
           console.log(this.user);
         });
     });

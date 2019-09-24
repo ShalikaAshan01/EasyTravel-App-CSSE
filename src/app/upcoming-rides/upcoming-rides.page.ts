@@ -31,7 +31,7 @@ export class UpcomingRidesPage implements OnInit {
       this.fireStore.collection('passengers').doc(this.userId).valueChanges()
         .subscribe(user => {
           this.user = user;
-          this.accountBalance = this.user.accountBalance;
+          this.accountBalance = +this.user.accountBalance;
           this.getRides(this.userId);
           console.log(this.user.accountBalance);
         });
@@ -68,7 +68,7 @@ export class UpcomingRidesPage implements OnInit {
   async cancelRide(ride) {
     const header = 'Cancel ride';
     const message = 'Do you really want to cancel the ride?';
-    this.ticketAmount = ride.ticketAmount;
+    this.ticketAmount = +ride.ticketAmount;
     this.showCancelAlert(ride, header, message)
   }
 
