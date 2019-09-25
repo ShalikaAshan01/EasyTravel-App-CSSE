@@ -40,14 +40,14 @@ export class BookRidePage implements OnInit {
   }
 
   ngOnInit() {
-    // this.firebaseAuthentication.onAuthStateChanged().subscribe((user) => {
-    //   this.userId = user.uid;
-    this.firestore.collection('passengers').doc(this.userId).valueChanges()
-      .subscribe(_user => {
-        this.userAccount = _user;
-        this.accountBalance = this.userAccount.accountBalance;
-      });
-    // });
+    this.firebaseAuthentication.onAuthStateChanged().subscribe((user) => {
+      this.userId = user.uid;
+      this.firestore.collection('passengers').doc(this.userId).valueChanges()
+        .subscribe(_user => {
+          this.userAccount = _user;
+          this.accountBalance = this.userAccount.accountBalance;
+        });
+    });
     this.routeService.getRoutes().subscribe(data => {
       this.routes = data.map(e => {
         return {
@@ -116,7 +116,7 @@ export class BookRidePage implements OnInit {
         }
       });
       var ride = {
-        createdAt: new Date().toISOString().slice(0, 19),
+        createdAt: new Date(),
         endPoint: endData.endPoint,
         endPointId: this.end,
         endPointCoordinate: endData.endPointCoordinate,
@@ -152,7 +152,7 @@ export class BookRidePage implements OnInit {
     }
   }
 
-  recharge(){
+  recharge() {
     this.navCtrl.navigateForward(['recharge']);
   }
 

@@ -28,7 +28,7 @@ export class UserServiceService {
       phoneNumber: number,
       holdBalance: 0,
       status: 'inactive',
-      createdDate: new Date().toISOString().slice(0, 10)
+      createdDate: new Date()
     }
     return this.firestore.collection('passengers').doc(userId).set(record).then(e => {
       console.log("Document successfully written!" + e);

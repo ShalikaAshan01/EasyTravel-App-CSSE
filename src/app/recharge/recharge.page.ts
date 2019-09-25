@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../services/user-service/user-service.service';
-import { Storage } from '@ionic/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AlertController, NavController } from '@ionic/angular';
+import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 
 @Component({
   selector: 'app-recharge',
@@ -21,11 +21,11 @@ export class RechargePage implements OnInit {
   expDate: string;
   cvv: number;
 
-  constructor(private userService: UserServiceService, private storage: Storage, private fireStore: AngularFirestore, private alertController: AlertController, public navCtrl: NavController) {
+  constructor(private userService: UserServiceService, private fireStore: AngularFirestore, private alertController: AlertController, public navCtrl: NavController,
+    public firebaseAuthentication: FirebaseAuthentication) {
 
-    this.storage.get('user').then(val => {
-      this.userId = val.userId;
-
+    this.firebaseAuthentication.onAuthStateChanged().subscribe((user) => {
+      this.userId = user.uid;
       this.fireStore.collection('passengers').doc(this.userId).valueChanges()
         .subscribe(user => {
           this.user = user;

@@ -12,7 +12,7 @@
 <ion-content>
   <div #mapElement class="map"></div>
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button color="dark" routerLink="/menu/book-ride">
+    <ion-fab-button color="dark" (click)="bookRide()">
       <ion-icon name="bus"></ion-icon>
     </ion-fab-button>
   </ion-fab>

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Ride, RideService } from '../services/ride.service/ride.service';
 import { ModalController } from '@ionic/angular';
 import { RideDetailsModalPage } from '../modals/ride-details-modal/ride-details-modal.page';
-import { Storage } from '@ionic/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 
 @Component({
   selector: 'app-completed-rides',
@@ -18,18 +18,16 @@ export class CompletedRidesPage implements OnInit {
   bus: any;
   regNo: any;
 
-  constructor(private rideService: RideService, private modalController: ModalController, private storage: Storage,
+  constructor(private rideService: RideService, private modalController: ModalController, public firebaseAuthentication: FirebaseAuthentication,
     private fireStore: AngularFirestore) {
 
-    this.storage.get('user').then((val) => {
-      this.userId = val.userId;
-
+    this.firebaseAuthentication.onAuthStateChanged().subscribe((user) => {
+      this.userId = user.uid;
       this.fireStore.collection('passengers').doc(this.userId).valueChanges()
         .subscribe(user => {
           this.user = user;
           this.getRides(this.userId);
         });
-
     });
 
   }

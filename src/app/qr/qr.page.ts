@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { NavController, AlertController, ModalController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
 import { RideDetailsModalPage } from '../modals/ride-details-modal/ride-details-modal.page';
 import { RideService } from '../services/ride.service/ride.service';
 
@@ -16,7 +16,7 @@ export class QrPage implements OnInit {
   scannedCode = null;
   elementType = 'img';
   ride: any;
-  status: boolean = false;
+  status:any = "false";
 
   constructor(public activatedRoute: ActivatedRoute, public rideService: RideService,
     private router: Router, public navCtrl: NavController, private modalController: ModalController) {
@@ -28,6 +28,7 @@ export class QrPage implements OnInit {
       console.log(res.data);
       this.qrData = res.data;
       this.status = res.status;
+      console.log(res);
       if(this.status){
         this.rideService.getRideByID(this.qrData).subscribe(data => {
           console.log(data.data());

@@ -3,9 +3,9 @@ import { ToastController, AlertController, ModalController } from '@ionic/angula
 import { RideService } from '../services/ride.service/ride.service';
 import { RideDetailsModalPage } from '../modals/ride-details-modal/ride-details-modal.page';
 import { UserServiceService } from '../services/user-service/user-service.service';
-import { Storage } from '@ionic/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-upcoming-rides',
@@ -15,7 +15,7 @@ import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ng
 export class UpcomingRidesPage implements OnInit {
 
   user: any;
-  userId: any = 'kT9HbHVP8eXNDeubcaomjUXMOBm1';
+  userId: any;
   accountBalance: number = 0;
   ticketAmount: number = 0;
 
@@ -25,8 +25,8 @@ export class UpcomingRidesPage implements OnInit {
   regNo: any;
 
   constructor(private toastController: ToastController, private rideService: RideService, private alertController: AlertController,
-    private modalController: ModalController, private storage: Storage, private fireStore: AngularFirestore, public firebaseAuthentication: FirebaseAuthentication,
-    private userService: UserServiceService) {
+    private modalController: ModalController, private fireStore: AngularFirestore, public firebaseAuthentication: FirebaseAuthentication,
+    private userService: UserServiceService, public navCtrl: NavController) {
 
     this.firebaseAuthentication.onAuthStateChanged().subscribe((user) => {
       this.userId = user.uid;
@@ -67,15 +67,22 @@ export class UpcomingRidesPage implements OnInit {
 
 
   async viewRide(ride) {
-    const modal = await this.modalController.create({
-      component: RideDetailsModalPage,
-      componentProps: {
-        'ride': ride,
-        'docId': ride.id
+    console.log(ride.id)
+    this.navCtrl.navigateRoot(['qr'], {
+      queryParams: {
+        data: ride.id,
+        status: true
       }
     });
-    return await modal.present();
-  }
+    // const modal = await this.modalController.create({
+    //   component: RideDetailsModalPage,
+    //   componentProps: {
+    //     'ride': ride,
+    //     'docId': ride.id
+    //   }
+    // });
+    // return await modal.present();
+  }0
 
   async cancelRide(ride) {
     const header = 'Cancel ride';

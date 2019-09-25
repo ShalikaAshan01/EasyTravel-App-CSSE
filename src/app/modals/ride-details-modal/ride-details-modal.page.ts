@@ -20,7 +20,7 @@ export class RideDetailsModalPage implements OnInit {
   accountBalance: any;
 
   // extend: any;
-  userId: any = "kT9HbHVP8eXNDeubcaomjUXMOBm1";
+  userId: any;
   userAccount: any;
   start: any;
   end: any;
@@ -47,14 +47,14 @@ export class RideDetailsModalPage implements OnInit {
     this.ride = this.navParams.get('ride');
     this.docID = this.navParams.get('docId');
 
-    // this.firebaseAuthentication.onAuthStateChanged().subscribe((user) => {
-    //   this.userId = user.uid;
-    this.firestore.collection('passengers').doc(this.userId).valueChanges()
-      .subscribe(_user => {
-        this.userAccount = _user;
-        this.accountBalance = this.userAccount.accountBalance;
-      });
-    // });
+    this.firebaseAuthentication.onAuthStateChanged().subscribe((user) => {
+      this.userId = user.uid;
+      this.firestore.collection('passengers').doc(this.userId).valueChanges()
+        .subscribe(_user => {
+          this.userAccount = _user;
+          this.accountBalance = this.userAccount.accountBalance;
+        });
+    });
     this.start = this.ride.startPoint;
     this.end = this.ride.endPoint;
     this.route = this.ride.route;
@@ -153,7 +153,7 @@ export class RideDetailsModalPage implements OnInit {
     })
   }
 
-  recharge(){
+  recharge() {
     this.navCtrl.navigateForward(['recharge']);
   }
 
