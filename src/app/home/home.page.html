@@ -10,6 +10,7 @@
 </ion-header>
 
 <ion-content>
+  <ion-progress-bar *ngIf="showProgressBar" type="indeterminate" color="dark"></ion-progress-bar>
   <div #mapElement class="map"></div>
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button color="dark" (click)="bookRide()">

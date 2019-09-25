@@ -68,7 +68,7 @@ export class UpcomingRidesPage implements OnInit {
 
   async viewRide(ride) {
     console.log(ride.id)
-    this.navCtrl.navigateRoot(['qr'], {
+    this.navCtrl.navigateForward(['qr'], {
       queryParams: {
         data: ride.id,
         status: true

@@ -142,15 +142,17 @@ export class NavigationMenuPage implements OnInit {
   }
 
   scheduleNotification() {
-    this.localNotifications.schedule({
-      id: 1,
-      title: 'Attention',
-      text: 'You are arrived your location',
-      data: { mydata: 'My hidden message this is' },
-      trigger: { in: 1, unit: ELocalNotificationTriggerUnit.SECOND },
-      foreground: true // Show the notification while app is open
-    });
-    this.isOngoing = false;
+    if(this.isOngoing){
+      this.isOngoing = false;
+      this.localNotifications.schedule({
+        id: 1,
+        title: 'Attention',
+        text: 'You are arrived your location',
+        data: { mydata: 'My hidden message this is' },
+        trigger: { in: 1, unit: ELocalNotificationTriggerUnit.SECOND },
+        foreground: true // Show the notification while app is open
+      });
+    }
   }
 
   showAlert(header, sub, msg) {

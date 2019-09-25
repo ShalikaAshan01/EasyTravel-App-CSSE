@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController, NavParams, NavController } from '@ionic/angular';
+import { ModalController, NavParams, NavController, AlertController } from '@ionic/angular';
 import { UserServiceService } from '../../services/user-service/user-service.service';
 import { RouteServiceService } from '../../services/route-service/route-service.service';
 import { RideService } from '../../services/ride.service/ride.service';
@@ -40,7 +40,7 @@ export class RideDetailsModalPage implements OnInit {
 
   constructor(private modalController: ModalController, private navParams: NavParams, private userService: UserServiceService,
     public firebaseAuthentication: FirebaseAuthentication, private firestore: AngularFirestore, public navCtrl: NavController, public rideService: RideService,
-    public routeService: RouteServiceService) {
+    public routeService: RouteServiceService, public alertController: AlertController) {
   }
 
   ngOnInit() {
@@ -148,13 +148,30 @@ export class RideDetailsModalPage implements OnInit {
       }
       this.userService.updateUser(this.userId, data).then(resp => {
         console.log("Updated successfull!!" + resp);
-        this.dismissModal();
+        this.presentAlertConfirm();
       });
     })
   }
 
   recharge() {
     this.navCtrl.navigateForward(['recharge']);
+  }
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Success!',
+      message: 'Your ride extended successfully!!!',
+      buttons: [
+        {
+          text: 'Okay',
+          handler: () => {
+            this.dismissModal();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }

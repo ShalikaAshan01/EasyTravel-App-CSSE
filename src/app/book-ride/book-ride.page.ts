@@ -3,7 +3,7 @@ import { Storage } from '@ionic/storage';
 import { RouteServiceService } from '../services/route-service/route-service.service';
 import { RideService } from '../services/ride.service/ride.service'
 import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
 import { UserServiceService } from '../services/user-service/user-service.service';
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -35,7 +35,7 @@ export class BookRidePage implements OnInit {
 
   constructor(private storage: Storage, public routeService: RouteServiceService, public rideService: RideService,
     private router: Router, public navCtrl: NavController, private userService: UserServiceService, public firebaseAuthentication: FirebaseAuthentication,
-    private firestore: AngularFirestore) {
+    private firestore: AngularFirestore, public alertController: AlertController) {
 
   }
 
@@ -133,12 +133,7 @@ export class BookRidePage implements OnInit {
         console.log(resp.id);
         this.status = 'created';
         this.qrData = resp.id;
-        this.navCtrl.navigateRoot(['qr'], {
-          queryParams: {
-            data: this.qrData,
-            status: true
-          }
-        });
+        this.presentAlertConfirm();
         var data = {
           accountBalance: this.accountBalance,
         }
@@ -155,5 +150,25 @@ export class BookRidePage implements OnInit {
   recharge() {
     this.navCtrl.navigateForward(['recharge']);
   }
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Success!',
+      message: 'Your ride booked successfully!!!',
+      buttons: [
+        {
+          text: 'Okay',
+          handler: () => {
+            this.navCtrl.navigateRoot(['qr'], {
+              queryParams: {
+                data: this.qrData,
+                status: true
+              }
+            });
+          }
+        }
+      ]
+    });
 
+    await alert.present();
+  }
 }

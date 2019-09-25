@@ -20,6 +20,7 @@ export class HomePage implements OnInit, AfterViewInit {
   userAccount: any;
   status: any;
   userId: string;
+  showProgressBar: boolean = true;
 
   constructor(private geolocation: Geolocation, private firestore: AngularFirestore, public firebaseAuthentication: FirebaseAuthentication,
     public modalController: ModalController, public navCtrl: NavController) {
@@ -46,7 +47,7 @@ export class HomePage implements OnInit, AfterViewInit {
         center: { lat: -34.397, lng: 150.644 },
         zoom: 16
       });
-      /*location object*/
+      
       const pos = {
         lat: this.latitude,
         lng: this.longitude
@@ -62,6 +63,7 @@ export class HomePage implements OnInit, AfterViewInit {
         title: 'Hello World!',
         icon: icon
       });
+      this.showProgressBar = false;
     }).catch((error) => {
       console.log('Error getting location', error);
     });
