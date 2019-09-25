@@ -10,7 +10,30 @@
 </ion-header>
 
 <ion-content>
-  <ion-progress-bar *ngIf="showProgressBar" type="indeterminate" color="dark"></ion-progress-bar>
+  <ng-container *ngIf="loaded">
+      <ion-item *ngFor="let n of [0, 1, 2, 3]">
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <p>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+        <ion-thumbnail slot="end">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+      </ion-item>
+    </ng-container>
   <div #mapElement class="map"></div>
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button color="dark" (click)="bookRide()">

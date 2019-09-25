@@ -20,7 +20,7 @@ export class HomePage implements OnInit, AfterViewInit {
   userAccount: any;
   status: any;
   userId: string;
-  showProgressBar: boolean = true;
+  loaded: boolean = true;
 
   constructor(private geolocation: Geolocation, private firestore: AngularFirestore, public firebaseAuthentication: FirebaseAuthentication,
     public modalController: ModalController, public navCtrl: NavController) {
@@ -63,7 +63,7 @@ export class HomePage implements OnInit, AfterViewInit {
         title: 'Hello World!',
         icon: icon
       });
-      this.showProgressBar = false;
+      this.loaded = false;
     }).catch((error) => {
       console.log('Error getting location', error);
     });
