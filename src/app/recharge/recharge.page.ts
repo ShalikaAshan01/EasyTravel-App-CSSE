@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../services/user-service/user-service.service';
 import { Storage } from '@ionic/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-recharge',
@@ -21,7 +21,7 @@ export class RechargePage implements OnInit {
   expDate: string;
   cvv: number;
 
-  constructor(private userService: UserServiceService, private storage: Storage, private fireStore: AngularFirestore, private alertController: AlertController) {
+  constructor(private userService: UserServiceService, private storage: Storage, private fireStore: AngularFirestore, private alertController: AlertController, public navCtrl: NavController) {
 
     this.storage.get('user').then(val => {
       this.userId = val.userId;
@@ -72,6 +72,7 @@ export class RechargePage implements OnInit {
     this.expDate = null;
     this.cvv = null;
 
+    this.navCtrl.pop();
   }
 
   async showRechargeAlert(header, message) {

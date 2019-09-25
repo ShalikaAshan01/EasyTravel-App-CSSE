@@ -56,21 +56,23 @@ export class NavigationMenuPage implements OnInit {
   accBalance: number;
   lname: any;
   fname: any;
-  userId: any;
+  userId: any = "kT9HbHVP8eXNDeubcaomjUXMOBm1";
   phoneNumber: any;
   isOngoing: boolean;
   currentGeoHash: string = null;
   endGeoHash: string = null;
+  ride: any;
 
   constructor(private router: Router, private storage: Storage, private firestore: AngularFirestore, private alertCtrl: AlertController,
     public rideService: RideService, private localNotifications: LocalNotifications, private platform: Platform, private geolocation: Geolocation,
     public firebaseAuthentication: FirebaseAuthentication, public modalController: ModalController) {
+
     this.initializeApp();
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedPath = event.url;
     });
-    firebaseAuthentication.onAuthStateChanged().subscribe((user) => {
-      this.userId = user.uid;
+    // firebaseAuthentication.onAuthStateChanged().subscribe((user) => {
+    //   this.userId = user.uid;
       this.firestore.collection('passengers').doc(this.userId).valueChanges()
         .subscribe(_user => {
           this.userAccount = _user;
@@ -78,17 +80,16 @@ export class NavigationMenuPage implements OnInit {
           this.lname = this.userAccount.lastName;
           this.accBalance = this.userAccount.accountBalance;
           this.phoneNumber = this.userAccount.phoneNumber;
-          this.storage.set('user', this.userAccount);
-          // console.log(this.userAccount);
-        });
+        // });
       this.rideService.getOngoingRide(this.userId).subscribe(_data => {
         console.log('_data');
-        var data = _data;
-        if (data[0]) {
+        this.ride = _data;
+        if (this.ride[0]) {
+          console.log(this.ride[0]);
           this.isOngoing = true;
           console.log(87, this.isOngoing);
-          var endLat = data[0].endPointCoordinate._lat;
-          var endLong = data[0].endPointCoordinate._long;
+          var endLat = this.ride[0].endPointCoordinate._lat;
+          var endLong = this.ride[0].endPointCoordinate._long;
           this.endGeoHash = this.rideService.genGeoHash(endLat, endLong);
           console.log(this.endGeoHash);
           this.matchLocation();
@@ -105,12 +106,12 @@ export class NavigationMenuPage implements OnInit {
     this.platform.ready().then(() => {
       this.localNotifications.on('click').subscribe(res => {
         let msg = res.data ? res.data.mydata : '';
-        this.showAlert(res.title, res.text, msg);
+        this.presentModal();
       });
 
       this.localNotifications.on('trigger').subscribe(res => {
         let msg = res.data ? res.data.mydata : '';
-        this.showAlert(res.title, res.text, msg);
+        this.presentModal();
       });
     });
   }
@@ -123,7 +124,7 @@ export class NavigationMenuPage implements OnInit {
           var cLatitude = resp.coords.latitude;
           var cLongitude = resp.coords.longitude;
           this.currentGeoHash = this.rideService.genGeoHash(cLatitude, cLongitude);
-          console.log(resp);
+          console.log(126,resp);
           if (this.endGeoHash == this.currentGeoHash) {
             this.scheduleNotification();
             console.log(this.endGeoHash);
@@ -138,7 +139,7 @@ export class NavigationMenuPage implements OnInit {
   }
 
   ngOnInit() {
-    this.presentModal();
+    //this.presentModal();
   }
 
   scheduleNotification() {
@@ -164,7 +165,10 @@ export class NavigationMenuPage implements OnInit {
 
   async presentModal() {
     const modal = await this.modalController.create({
-      component: ReminderPage
+      component: ReminderPage,
+      componentProps: {
+        'qrID': this.ride.id,
+      }
     });
     return await modal.present();
   }

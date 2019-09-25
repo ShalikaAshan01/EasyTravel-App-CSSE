@@ -5,13 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TestPagePage } from './test-page.page';
-import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { ActivatePage } from './activate.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: TestPagePage
+    component: ActivatePage
   }
 ];
 
@@ -20,9 +19,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
-    NgxQRCodeModule
+    RouterModule.forChild(routes)
   ],
-  declarations: [TestPagePage]
+  declarations: [ActivatePage]
 })
-export class TestPagePageModule {}
+export class ActivatePageModule {}

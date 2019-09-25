@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController, AlertController, ModalController } from '@ionic/angular';
 import { RideService } from '../services/ride.service/ride.service';
-import { RideDetailsModalPage } from '../ride-details-modal/ride-details-modal.page';
+import { RideDetailsModalPage } from '../modals/ride-details-modal/ride-details-modal.page';
 import { UserServiceService } from '../services/user-service/user-service.service';
 import { Storage } from '@ionic/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 
 @Component({
   selector: 'app-upcoming-rides',
@@ -14,7 +15,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class UpcomingRidesPage implements OnInit {
 
   user: any;
-  userId: any = ' ';
+  userId: any = 'kT9HbHVP8eXNDeubcaomjUXMOBm1';
   accountBalance: number = 0;
   ticketAmount: number = 0;
 
@@ -24,12 +25,11 @@ export class UpcomingRidesPage implements OnInit {
   regNo: any;
 
   constructor(private toastController: ToastController, private rideService: RideService, private alertController: AlertController,
-    private modalController: ModalController, private storage: Storage, private fireStore: AngularFirestore,
+    private modalController: ModalController, private storage: Storage, private fireStore: AngularFirestore, public firebaseAuthentication: FirebaseAuthentication,
     private userService: UserServiceService) {
 
-    this.storage.get('user').then((val) => {
-      this.userId = val.userId;
-
+    this.firebaseAuthentication.onAuthStateChanged().subscribe((user) => {
+      this.userId = user.uid;
       this.fireStore.collection('passengers').doc(this.userId).valueChanges()
         .subscribe(user => {
           this.user = user;
@@ -70,7 +70,8 @@ export class UpcomingRidesPage implements OnInit {
     const modal = await this.modalController.create({
       component: RideDetailsModalPage,
       componentProps: {
-        'ride': ride
+        'ride': ride,
+        'docId': ride.id
       }
     });
     return await modal.present();

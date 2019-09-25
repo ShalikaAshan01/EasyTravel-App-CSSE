@@ -11,7 +11,7 @@
     </ion-label>
     <ion-note slot="end">
       <ion-badge [color]="1 ? 'success' : 'danger'">
-        <strong>LKR 1000</strong>
+        <strong>LKR {{accountBalance}}</strong>
       </ion-badge>
     </ion-note>
   </ion-item>
@@ -26,50 +26,45 @@
           <ion-row>
             <ion-col>
 
-              <!-- <div style="width: 50%; margin: auto; text-align:center">
+              <div style="width: 50%; margin: auto; text-align:center">
                 <img src="./../../assets/images/logo.png" alt="" />
-              </div> -->
+              </div>
 
-              <form (ngSubmit)="login()">
+              <form (ngSubmit)="bookNow()">
                 <ion-list>
                   <ion-item lines="none">
                     <ion-label position="stacked">Bus Route</ion-label>
-                    <ion-select value="" okText="Okay" cancelText="Dismiss">
-                      <ion-select-option value="brown">Brown</ion-select-option>
-                      <ion-select-option value="blonde">Blonde</ion-select-option>
-                      <ion-select-option value="black">Black</ion-select-option>
-                      <ion-select-option value="red">Red</ion-select-option>
-                    </ion-select>
+                    <ion-select value="" okText="Okay" [(ngModel)]="route" (ionChange)="routeSelect($event)" cancelText="Dismiss" [ngModelOptions]="{standalone: true}">
+                        <ion-select-option *ngFor="let route of routes" value="{{route.id}}">{{route.routeNo}}</ion-select-option>
+                      </ion-select>
                   </ion-item>
                   <ion-item lines="none">
                     <ion-label position="stacked">Start Point</ion-label>
-                    <ion-select value="" okText="Okay" cancelText="Dismiss">
-                      <ion-select-option value="brown">Brown</ion-select-option>
-                      <ion-select-option value="blonde">Blonde</ion-select-option>
-                      <ion-select-option value="black">Black</ion-select-option>
-                      <ion-select-option value="red">Red</ion-select-option>
-                    </ion-select>
+                    <ion-select value="" okText="Okay" [(ngModel)]="start" (ionChange)="pointSelect($event)" cancelText="Dismiss" [ngModelOptions]="{standalone: true}">
+                        <ion-select-option *ngFor="let spoint of sPoints" value="{{spoint.id}}">{{spoint.name}}</ion-select-option>
+                      </ion-select>
                   </ion-item>
                   <ion-item lines="none">
                     <ion-label position="stacked">End Point</ion-label>
-                    <ion-select value="" okText="Okay" cancelText="Dismiss">
-                      <ion-select-option value="brown">Brown</ion-select-option>
-                      <ion-select-option value="blonde">Blonde</ion-select-option>
-                      <ion-select-option value="black">Black</ion-select-option>
-                      <ion-select-option value="red">Red</ion-select-option>
-                    </ion-select>
+                    <ion-select value="" okText="Okay" [(ngModel)]="end" (ionChange)="pointSelect($event)" cancelText="Dismiss" [ngModelOptions]="{standalone: true}">
+                        <ion-select-option *ngFor="let epoint of ePoints" value="{{epoint.id}}">{{epoint.name}}</ion-select-option>
+                      </ion-select>
                   </ion-item>
-                  <ion-item lines="none" *ngIf="startPoint == null && endPoint == null">
+                  <ion-item lines="none" *ngIf="start == 0 && end == 0">
                     <ion-note slot="start" color="dark">
                       <h5><strong>Ticket Price</strong></h5>
                     </ion-note>
                     <ion-note slot="end" color="danger">
-                      <h5><strong>LKR 100</strong></h5>
+                      <h5><strong>LKR {{amount}}</strong></h5>
                     </ion-note>
                   </ion-item>
-                  <ion-item lines="none">
+                  <ion-item lines="none" *ngIf="bal!='insufficent'">
                     <ion-button expand="block" class="btn-secondary" color="dark" type="submit">Book Now</ion-button>
                   </ion-item>
+                  <h6 *ngIf="bal=='insufficent'"><b>Insufficent Balance...Please recharge</b></h6>
+                  <ion-item lines="none" *ngIf="bal=='insufficent'">
+                      <ion-button expand="block" class="btn-secondary" color="dark" (click)="recharge()">Recharge</ion-button>
+                    </ion-item>
                   <p text-center>Select your journey to book your ride.</p>
                 </ion-list>
               </form>

@@ -17,17 +17,15 @@ import { IonicStorageModule } from '@ionic/storage';
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
-import { ReminderPage } from './modals/reminder/reminder.page'
-import { RideDetailsModalPageModule } from './ride-details-modal/ride-details-modal.module';
+import { ReminderPageModule } from './modals/reminder/reminder.module'
+import { RideDetailsModalPageModule } from './modals/ride-details-modal/ride-details-modal.module';
+import { ActivatePageModule } from './modals/activate/activate.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ReminderPage
   ],
-  entryComponents: [
-    ReminderPage
-],
+  entryComponents: [],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
@@ -36,6 +34,8 @@ import { RideDetailsModalPageModule } from './ride-details-modal/ride-details-mo
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     RideDetailsModalPageModule,
+    ReminderPageModule,
+    ActivatePageModule,
     IonicStorageModule.forRoot()
   ],
   providers: [
