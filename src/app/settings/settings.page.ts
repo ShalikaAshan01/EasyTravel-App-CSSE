@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
+import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 
 @Component({
   selector: 'app-settings',
@@ -26,11 +27,12 @@ export class SettingsPage implements OnInit {
     private firestore: AngularFirestore,
     private router: Router,
     public alertController: AlertController,
-    public navCtrl: NavController) { }
+    public navCtrl: NavController,
+    public firebaseAuthentication: FirebaseAuthentication) { }
 
   ngOnInit() {
-    this.storage.get('user').then((val) => {
-      this.userId = val.userId;
+    this.firebaseAuthentication.onAuthStateChanged().subscribe((user) => {
+      this.userId = user.uid;
       this.firestore.collection('passengers').doc(this.userId).valueChanges()
         .subscribe(_user => {
           this.userAccount = _user;

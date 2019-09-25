@@ -9,7 +9,7 @@ ion-button {
   color: black !important;
   width: 100%;
   height: 50px;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 ion-input {
@@ -18,7 +18,7 @@ ion-input {
   font-size: 20px;
   height: 50px;
   background-color: #ccc805;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 $white-color: #fff;
@@ -45,9 +45,3 @@ ion-button {
 ion-card {
   margin: 20px 0px !important;
 }
-
-// @media (min-width: 240px) and (max-width: 768px) {
-//   ion-col {
-//     border: none;
-//   }
-// }

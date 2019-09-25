@@ -8,40 +8,39 @@
 </ion-header>
 
 <ion-content>
-  <ion-progress-bar *ngIf="showProgressBar" type="indeterminate" color="dark"></ion-progress-bar>
   <ion-grid>
     <ion-grid class="content">
 
       <ion-row justify-content-center>
 
-        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+        <ion-col align-self-center size-lg="6">
           <ion-row>
             <ion-col>
 
               <form (ngSubmit)="updateUser()">
 
                 <ion-item lines="none">
-                  <ion-label position="fixed">Phone </ion-label>
+                  <ion-label position="stacked">Phone </ion-label>
                   <ion-input disabled [(ngModel)]="phoneNumber" name="phoneNumber" color="dark" type="text">
                   </ion-input>
                 </ion-item>
                 <ion-item lines="none">
-                  <ion-label position="fixed">Balance</ion-label>
+                  <ion-label position="stacked">Balance</ion-label>
                   <ion-input disabled [(ngModel)]="accountBalance" name="accountBalance" color="dark" type="text">
                   </ion-input>
                 </ion-item>
                 <ion-item lines="none">
-                  <ion-label position="fixed">First Name</ion-label>
+                  <ion-label position="stacked">First Name</ion-label>
                   <ion-input [(ngModel)]="firstname" name="firstname" color="dark" type="text">
                   </ion-input>
                 </ion-item>
                 <ion-item lines="none">
-                  <ion-label position="fixed">Last Name</ion-label>
+                  <ion-label position="stacked">Last Name</ion-label>
                   <ion-input [(ngModel)]="lastname" name="lastname" color="dark" type="text">
                   </ion-input>
                 </ion-item>
                 <ion-item lines="none">
-                  <ion-label position="fixed">NIC</ion-label>
+                  <ion-label position="stacked">NIC</ion-label>
                   <ion-input [(ngModel)]="nic" name="nic" color="dark" type="text">
                   </ion-input>
                 </ion-item>

@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="menu"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Scan QR</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-grid>
+      <ion-grid class="content">
+        <ion-row justify-content-center>
+          <ion-col align-self-center size-lg="6">
+            <ion-row>
+              <ion-col style="padding-top: 20px">
+                <div style="width: 100%; margin: auto; text-align:center">
+                    <ngx-qrcode [qrc-value]="qrData" [qrc-element-type]="elementType" qrc-class="qr-class">
+                      </ngx-qrcode>
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col style="padding-top: 20px" *ngIf="status=='true'">
+                  <ion-button expand="block" class="btn-secondary" color="dark" (click)="extend()">Extend Ride</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-grid>
+  </ion-content>
+

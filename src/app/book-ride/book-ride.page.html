@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="menu"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Book Ride</ion-title>
+  </ion-toolbar>
+  <ion-item lines="none">
+    <ion-label>
+      <h2><strong>Account Balance</strong></h2>
+    </ion-label>
+    <ion-note slot="end">
+      <ion-badge [color]="1 ? 'success' : 'danger'">
+        <strong>LKR {{accountBalance}}</strong>
+      </ion-badge>
+    </ion-note>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-grid class="content">
+      <ion-row justify-content-center>
+        <ion-col align-self-center size-lg="6">
+          <ion-row>
+            <ion-col>
+
+              <div style="width: 50%; margin: auto; text-align:center">
+                <img src="./../../assets/images/logo.png" alt="" />
+              </div>
+
+              <form (ngSubmit)="bookNow()">
+                <ion-list>
+                  <ion-item lines="none">
+                    <ion-label position="stacked">Bus Route</ion-label>
+                    <ion-select value="" okText="Okay" [(ngModel)]="route" (ionChange)="routeSelect($event)" cancelText="Dismiss" [ngModelOptions]="{standalone: true}">
+                        <ion-select-option *ngFor="let route of routes" value="{{route.id}}">{{route.routeNo}}</ion-select-option>
+                      </ion-select>
+                  </ion-item>
+                  <ion-item lines="none">
+                    <ion-label position="stacked">Start Point</ion-label>
+                    <ion-select value="" okText="Okay" [(ngModel)]="start" (ionChange)="pointSelect($event)" cancelText="Dismiss" [ngModelOptions]="{standalone: true}">
+                        <ion-select-option *ngFor="let spoint of sPoints" value="{{spoint.id}}">{{spoint.name}}</ion-select-option>
+                      </ion-select>
+                  </ion-item>
+                  <ion-item lines="none">
+                    <ion-label position="stacked">End Point</ion-label>
+                    <ion-select value="" okText="Okay" [(ngModel)]="end" (ionChange)="pointSelect($event)" cancelText="Dismiss" [ngModelOptions]="{standalone: true}">
+                        <ion-select-option *ngFor="let epoint of ePoints" value="{{epoint.id}}">{{epoint.name}}</ion-select-option>
+                      </ion-select>
+                  </ion-item>
+                  <ion-item lines="none" *ngIf="start == 0 && end == 0">
+                    <ion-note slot="start" color="dark">
+                      <h5><strong>Ticket Price</strong></h5>
+                    </ion-note>
+                    <ion-note slot="end" color="danger">
+                      <h5><strong>LKR {{amount}}</strong></h5>
+                    </ion-note>
+                  </ion-item>
+                  <ion-item lines="none" *ngIf="bal!='insufficent'">
+                    <ion-button expand="block" class="btn-secondary" color="dark" type="submit">Book Now</ion-button>
+                  </ion-item>
+                  <h6 *ngIf="bal=='insufficent'"><b>Insufficent Balance...Please recharge</b></h6>
+                  <ion-item lines="none" *ngIf="bal=='insufficent'">
+                      <ion-button expand="block" class="btn-secondary" color="dark" (click)="recharge()">Recharge</ion-button>
+                    </ion-item>
+                  <p text-center>Select your journey to book your ride.</p>
+                </ion-list>
+              </form>
+
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-grid>
+  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="dark" routerLink="/menu/routes">
+      <ion-icon name="time"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+</ion-content>
