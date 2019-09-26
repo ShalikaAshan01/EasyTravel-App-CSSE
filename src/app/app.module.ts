@@ -20,6 +20,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { ReminderPageModule } from './modals/reminder/reminder.module'
 import { RideDetailsModalPageModule } from './modals/ride-details-modal/ride-details-modal.module';
 import { ActivatePageModule } from './modals/activate/activate.module';
+import { PayPal } from '@ionic-native/paypal/ngx';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ActivatePageModule } from './modals/activate/activate.module';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     FirebaseAuthentication,
-    LocalNotifications
+    LocalNotifications,
+    PayPal
   ],
   bootstrap: [AppComponent]
 })
