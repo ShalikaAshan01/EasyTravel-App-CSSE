@@ -4,52 +4,63 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Account Recharge</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="secondary" (click)="viewHistory()">
+        History
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-grid>
     <ion-grid class="content">
-
       <ion-row justify-content-center>
-
         <ion-col align-self-center size-lg="6">
           <ion-row>
             <ion-col>
 
               <form (ngSubmit)="rechargeAccount()">
-
                 <ion-item lines="none">
-                  <ion-label position="stacked">Payment Amount </ion-label>
+                  <ion-label position="stacked">Recharge Amount </ion-label>
                   <ion-input [(ngModel)]="rechargeAmount" name="rechargeAmount" color="dark" type="number"
                     placeholder="1000.00">
                   </ion-input>
                 </ion-item>
-                <ion-item lines="none">
-                  <ion-label position="stacked">Name on Card</ion-label>
-                  <ion-input [(ngModel)]="cardName" name="cardName" color="dark" type="text" placeholder="John Doe">
-                  </ion-input>
-                </ion-item>
-                <ion-item lines="none">
-                  <ion-label position="stacked">Card Number</ion-label>
-                  <ion-input [(ngModel)]="cardNumber" name="cardNumber" color="dark" type="number"
-                    placeholder="16 digits">
-                  </ion-input>
-                </ion-item>
-                <ion-item lines="none">
-                  <ion-label position="stacked">Expiry Date</ion-label>
-                  <ion-input [(ngModel)]="expDate" name="expDate" color="dark" type="text" placeholder="MM/YY">
-                  </ion-input>
-                </ion-item>
-                <ion-item lines="none">
-                  <ion-label position="stacked">CVV</ion-label>
-                  <ion-input [(ngModel)]="cvv" name="cvv" color="dark" type="text" placeholder="123">
-                  </ion-input>
-                </ion-item>
 
-                <ion-item lines="none">
-                  <ion-button expand="full" color="dark" class="btn-secondary" type="submit">
-                    Recharge
+                <div *ngIf="isCardPayment">
+                  <ion-item lines="none">
+                    <ion-label position="stacked">Name on Card</ion-label>
+                    <ion-input [(ngModel)]="cardName" name="cardName" color="dark" type="text" placeholder="John Doe">
+                    </ion-input>
+                  </ion-item>
+                  <ion-item lines="none">
+                    <ion-label position="stacked">Card Number</ion-label>
+                    <ion-input [(ngModel)]="cardNumber" name="cardNumber" color="dark" type="number"
+                      placeholder="16 digits">
+                    </ion-input>
+                  </ion-item>
+                  <ion-item lines="none">
+                    <ion-label position="stacked">Expiry Date</ion-label>
+                    <ion-input [(ngModel)]="expDate" name="expDate" color="dark" type="text" placeholder="MM/YY">
+                    </ion-input>
+                  </ion-item>
+                  <ion-item lines="none">
+                    <ion-label position="stacked">CVV</ion-label>
+                    <ion-input [(ngModel)]="cvv" name="cvv" color="dark" type="number" placeholder="123">
+                    </ion-input>
+                  </ion-item>
+
+                  <ion-item lines="none">
+                    <ion-button expand="full" color="dark" class="btn-secondary" type="submit">
+                      Recharge with card
+                    </ion-button>
+                  </ion-item>
+                </div>
+
+                <ion-item lines="none" *ngIf="!isCardPayment">
+                  <ion-button expand="full" color="dark" class="btn-secondary" (click)="setCardPayment()">
+                    Card Payment
                   </ion-button>
                 </ion-item>
                 <ion-item lines="none">

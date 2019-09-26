@@ -19,6 +19,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 import { ReminderPageModule } from './modals/reminder/reminder.module'
 import { RideDetailsModalPageModule } from './modals/ride-details-modal/ride-details-modal.module';
+import { PaymentHistoryPageModule } from './modals/payment-history/payment-history.module';
 import { ActivatePageModule } from './modals/activate/activate.module';
 import { PayPal } from '@ionic-native/paypal/ngx';
 
@@ -35,6 +36,7 @@ import { PayPal } from '@ionic-native/paypal/ngx';
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     RideDetailsModalPageModule,
+    PaymentHistoryPageModule,
     ReminderPageModule,
     ActivatePageModule,
     IonicStorageModule.forRoot()
