@@ -106,7 +106,7 @@ export class RideDetailsModalPage implements OnInit {
 
   pointSelect($event) {
     if (this.ePointId < this.exd) {
-      this.extendAmount = (this.exd - this.ePointId) * 8;
+      this.extendAmount = Math.abs((this.exd - this.ePointId) * 8);
       if (this.extendAmount > this.accountBalance) {
         this.bal = 'insufficent';
       } else {
@@ -114,7 +114,7 @@ export class RideDetailsModalPage implements OnInit {
       }
     }
     if (this.ePointId > this.exd) {
-      this.extendAmount = (this.ePointId - this.exd) * 8;
+      this.extendAmount = Math.abs((this.ePointId - this.exd) * 8);
       if (this.extendAmount > this.accountBalance) {
         this.bal = 'insufficent';
       } else {

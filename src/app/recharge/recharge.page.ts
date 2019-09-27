@@ -6,6 +6,7 @@ import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ng
 import { PayPal, PayPalPayment, PayPalConfiguration } from '@ionic-native/paypal/ngx';
 
 import { PaymentHistoryPage } from '../modals/payment-history/payment-history.page';
+import { ActivatePage } from '../modals/activate/activate.page';
 
 @Component({
   selector: 'app-recharge',
@@ -26,6 +27,7 @@ export class RechargePage implements OnInit {
   cvv: number;
 
   isCardPayment: boolean = false;
+  status: any;
 
   constructor(private userService: UserServiceService, private fireStore: AngularFirestore, private alertController: AlertController, public navCtrl: NavController,
     public firebaseAuthentication: FirebaseAuthentication, private payPal: PayPal, private modalController: ModalController) {
@@ -36,13 +38,17 @@ export class RechargePage implements OnInit {
         .subscribe(user => {
           this.user = user;
           this.accountBalance = +this.user.accountBalance;
+          this.status = this.user.status;
+          if (this.status == 'inactive') {
+            this.presentModalActivate();
+            this.navCtrl.navigateRoot(['menu/home']);
+          }
         });
     });
 
   }
 
   ngOnInit() {
-
   }
 
   async viewHistory() {
@@ -192,6 +198,13 @@ export class RechargePage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  async presentModalActivate() {
+    const modal = await this.modalController.create({
+      component: ActivatePage
+    });
+    return await modal.present();
   }
 
 }

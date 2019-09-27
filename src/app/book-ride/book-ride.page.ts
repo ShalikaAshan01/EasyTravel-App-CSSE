@@ -46,7 +46,7 @@ export class BookRidePage implements OnInit {
         .subscribe(_user => {
           this.userAccount = _user;
           this.accountBalance = this.userAccount.accountBalance;
-          if(this.accountBalance > this.amount){
+          if (this.accountBalance > this.amount) {
             this.bal = '';
           }
         });
@@ -87,9 +87,9 @@ export class BookRidePage implements OnInit {
 
     if ((this.end != 0) || (this.start != 0 && this.end != 0)) {
       if (this.start < this.end) {
-        this.amount = (this.end - this.start) * 8;
+        this.amount = Math.abs((this.end - this.start) * 8);
       } else {
-        this.amount = (this.start - this.end) * 8;
+        this.amount = Math.abs((this.start - this.end) * 8);
       }
     }
     if (this.amount > this.accountBalance) {
