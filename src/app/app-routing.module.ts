@@ -11,7 +11,6 @@ const routes: Routes = [
   { path: 'qr', loadChildren: './qr/qr.module#QrPageModule' },
   { path: 'recharge', loadChildren: './recharge/recharge.module#RechargePageModule' }
 
-
 ];
 
 @NgModule({

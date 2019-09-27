@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Payment History</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ng-container *ngIf="!payments">
+    <ion-item *ngFor="let n of [0, 1, 2, 3]">
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <p>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+      <ion-thumbnail slot="end">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+    </ion-item>
+  </ng-container>
+
+  <ion-item lines="inset" *ngFor="let payment of payments">
+    <ion-icon slot="start" name="add-circle" color="success"></ion-icon>
+    <ion-label>
+      <h2><strong>Account recharge</strong></h2>
+      <h2>LKR {{payment.amount}}</h2>
+      <p>Paid on: {{payment.createdAt.toDate() | date: 'MMM d, y, h:mm a'}}</p>
+    </ion-label>
+    <ion-note slot="end" text-center [color]="payment.method == 'Card' ? 'danger' : 'primary'">
+      <h4>{{payment.method}}</h4>
+    </ion-note>
+  </ion-item>
+
+</ion-content>

@@ -44,7 +44,15 @@ export class UserServiceService {
   }
 
   rechargeAccount(userId, user) {
-    return this.firestore.collection('passengers').doc(userId).update(user)
+    return this.firestore.collection('passengers').doc(userId).update(user);
+  }
+
+  addPayment(payment) {
+    return this.firestore.collection('payments').add(payment);
+  }
+
+  getPayments(userId) {
+    return this.firestore.collection('payments', ref => ref.where('passenger', '==', userId)).valueChanges();
   }
 
 }
