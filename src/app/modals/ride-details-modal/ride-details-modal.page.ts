@@ -122,6 +122,9 @@ export class RideDetailsModalPage implements OnInit {
       }
     }
     this.totalAmount = this.amount + this.extendAmount;
+    if (this.ePointId == this.exd) {
+      this.totalAmount = 0;
+    }
   }
 
   extend() {
@@ -154,6 +157,7 @@ export class RideDetailsModalPage implements OnInit {
   }
 
   recharge() {
+    this.dismissModal();
     this.navCtrl.navigateForward(['recharge']);
   }
 

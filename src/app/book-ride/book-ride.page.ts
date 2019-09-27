@@ -26,7 +26,7 @@ export class BookRidePage implements OnInit {
   points: any;
   sPoints: any;
   ePoints: any;
-  amount: any;
+  amount: number = 0;
   start: any = 0;
   end: any = 0;
   bal: string;
@@ -46,6 +46,9 @@ export class BookRidePage implements OnInit {
         .subscribe(_user => {
           this.userAccount = _user;
           this.accountBalance = this.userAccount.accountBalance;
+          if(this.accountBalance > this.amount){
+            this.bal = '';
+          }
         });
     });
     this.routeService.getRoutes().subscribe(data => {
