@@ -15,4 +15,8 @@ export class RouteServiceService {
   getRoutePoints(docId) {
     return this.firestore.collection('routes').doc(docId).collection('points').snapshotChanges();
   }
+
+  getStops(){
+    return this.firestore.collection('stops').snapshotChanges();
+  }
 }

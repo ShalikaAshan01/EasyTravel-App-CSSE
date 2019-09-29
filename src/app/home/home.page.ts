@@ -3,7 +3,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
 import { ModalController, NavController } from '@ionic/angular';
-
+import { RouteServiceService } from '../services/route-service/route-service.service';
 import { ActivatePage } from '../modals/activate/activate.page'
 
 declare var google;
@@ -21,9 +21,12 @@ export class HomePage implements OnInit, AfterViewInit {
   status: any;
   userId: string;
   loaded: boolean = true;
+  stops: any = [];
+  markers: any = [];
+  map: any;
 
   constructor(private geolocation: Geolocation, private firestore: AngularFirestore, public firebaseAuthentication: FirebaseAuthentication,
-    public modalController: ModalController, public navCtrl: NavController) {
+    public modalController: ModalController, public navCtrl: NavController, public routeService: RouteServiceService) {
 
   }
 
@@ -43,30 +46,61 @@ export class HomePage implements OnInit, AfterViewInit {
       this.latitude = resp.coords.latitude;
       this.longitude = resp.coords.longitude;
       console.log(resp);
-      const map = new google.maps.Map(this.mapNativeElement.nativeElement, {
+      this.map = new google.maps.Map(this.mapNativeElement.nativeElement, {
         center: { lat: -34.397, lng: 150.644 },
         zoom: 16
       });
-      
+
       const pos = {
         lat: this.latitude,
         lng: this.longitude
       };
-      map.setCenter(pos);
+      this.map.setCenter(pos);
       const icon = {
         url: 'assets/icon/user.png', // image url
         scaledSize: new google.maps.Size(50, 50), // scaled size
       };
       const marker = new google.maps.Marker({
         position: pos,
-        map: map,
+        map: this.map,
         title: 'Hello World!',
         icon: icon
       });
-      this.loaded = false;
+      this.routeService.getStops().subscribe(data => {
+        this.stops = data.map(e => {
+          return {
+            id: e.payload.doc.id,
+            isEdit: false,
+            stop: e.payload.doc.data()['stop'],
+          };
+        })
+        this.stops.forEach(element => {
+          this.addMarker(element.stop._lat, element.stop._long);
+        });
+        this.loaded = false;
+      });
     }).catch((error) => {
       console.log('Error getting location', error);
     });
+  }
+
+  addMarker(lat: any, long: any): void {
+    const icon = {
+      url: 'assets/icon/stop.png', // image url
+      scaledSize: new google.maps.Size(50, 50), // scaled size
+    };
+    const pos = {
+      lat: lat,
+      lng: long
+    };
+    let marker = new google.maps.Marker({
+      icon: icon,
+      map: this.map,
+      position: pos,
+      title: 'stops'
+    });
+    this.markers.push(marker);
+
   }
 
   bookRide() {

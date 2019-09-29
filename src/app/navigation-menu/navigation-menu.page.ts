@@ -55,7 +55,7 @@ export class NavigationMenuPage implements OnInit {
   accBalance: number;
   lname: any;
   fname: any;
-  userId: any = "kT9HbHVP8eXNDeubcaomjUXMOBm1";
+  userId: any;
   phoneNumber: any;
   isOngoing: boolean;
   currentGeoHash: string = null;
@@ -117,8 +117,9 @@ export class NavigationMenuPage implements OnInit {
 
   matchLocation() {
     console.log(116, this.isOngoing);
-    setInterval(() => {
-      if (this.isOngoing) {
+    if (this.isOngoing) {
+      var intVal = null;
+      intVal = setInterval(() => {
         this.geolocation.getCurrentPosition().then((resp) => {
           var cLatitude = resp.coords.latitude;
           var cLongitude = resp.coords.longitude;
@@ -127,14 +128,14 @@ export class NavigationMenuPage implements OnInit {
           if (this.endGeoHash == this.currentGeoHash) {
             this.scheduleNotification();
             console.log(this.endGeoHash);
+            clearInterval(intVal);
           }
         });
-      }
-    }, 10000);
-    if (!this.isOngoing) {
-      return null;
+      }, 10000);
+      // if (!this.isOngoing) {
+      //   return null;
+      // }
     }
-
   }
 
   ngOnInit() {
@@ -142,7 +143,7 @@ export class NavigationMenuPage implements OnInit {
   }
 
   scheduleNotification() {
-    if(this.isOngoing){
+    if (this.isOngoing) {
       this.isOngoing = false;
       this.localNotifications.schedule({
         id: 1,

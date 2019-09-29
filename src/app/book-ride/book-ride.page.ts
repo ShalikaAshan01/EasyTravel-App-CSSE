@@ -30,7 +30,7 @@ export class BookRidePage implements OnInit {
   start: any = 0;
   end: any = 0;
   bal: string;
-  userId: string = "kT9HbHVP8eXNDeubcaomjUXMOBm1";
+  userId: string;
   userAccount: any;
 
   constructor(private storage: Storage, public routeService: RouteServiceService, public rideService: RideService,
